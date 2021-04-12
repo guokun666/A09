@@ -9,14 +9,18 @@ public class LineNetworkDiagramEntity {
 
     private String text="Sta1";//信息
     private String shape="circle";//形状
-    private int[] size={8,8};//大小
+    private int size=8;//大小
     private String labelColor="#000";//标签颜色（黑色）
     private String labelPosition="bottom";//标签位置（下方）
-    private int[] position={0,0};//坐标位置值
+    private int positionX=0;//坐标位置值
+    private int positionY=0;//坐标位置值
     private String internalColor="#fff";//内部颜色（白色）
     private String borderCorlor="#10069f";//边框颜色
     private int borderWidth=2;//边框宽度
     private int rotate=0;//旋转角度
+
+    private String nextStation="Sta1";
+    private int weight=0;
 
 //    public static void main(String[] args) {
 //        LineNetworkDiagramEntity lineNetworkDiagramEntity=new LineNetworkDiagramEntity();
@@ -26,8 +30,8 @@ public class LineNetworkDiagramEntity {
     //设置线路标题信息
     public void setLineTitleInformation(String lineName,int x,int y,String labelColor){
         this.text=lineName;
-        this.position[0]=x;
-        this.position[1]=y;
+        this.positionX=x;
+        this.positionY=y;
         this.labelColor=labelColor;
     }
 
@@ -37,7 +41,7 @@ public class LineNetworkDiagramEntity {
 
         json.put("name",text);
         json.put("symbolSize",0.1);
-        json.put("value",position);
+        json.put("value",new int[]{positionX,positionY});
 
         JSONObject tooltipJson=new JSONObject();
         tooltipJson.put("show",false);//将图形体隐藏不显示
@@ -54,9 +58,9 @@ public class LineNetworkDiagramEntity {
     //设置站点信息
     public void setStationInformation(String staName,int size,int x,int y,String labelPosition,String internalColor,String borderColor){
         this.text=staName;
-        this.size[0]=this.size[1]=size;
-        this.position[0]=x;
-        this.position[1]=y;
+        this.size=size;
+        this.positionX=x;
+        this.positionY=y;
         this.labelPosition=labelPosition;
         this.internalColor=internalColor;
         this.borderCorlor=borderColor;
@@ -69,7 +73,7 @@ public class LineNetworkDiagramEntity {
         json.put("name",text);
         json.put("symbol","circle");//站点显示成圆
         json.put("symbolSize",size);
-        json.put("value",position);
+        json.put("value",new int[]{positionX,positionY});
 
         JSONObject labelJson=new JSONObject();
         labelJson.put("color","#000");//站点标签字体设置黑色
@@ -89,8 +93,8 @@ public class LineNetworkDiagramEntity {
 
     //设置列车信息
     public void setTrainInformation(int x,int y,int rotate,String nextStation,int weight){
-        this.position[0]=x;
-        this.position[1]=y;
+        this.positionX=x;
+        this.positionY=y;
         this.rotate=rotate;
         this.text="function(e){return '下一到站点: "+nextStation+" 载重数: "+weight+"kg';}";
     }
@@ -99,8 +103,8 @@ public class LineNetworkDiagramEntity {
     public JSONObject getTrainJson(){
         JSONObject json=new JSONObject();
 
-        json.put("xAxis",position[0]);
-        json.put("yAxis",position[1]);
+        json.put("xAxis",positionX);
+        json.put("yAxis",positionY);
         json.put("symbolSize",20);//图标大小
         json.put("symbolRotate",rotate);
 
