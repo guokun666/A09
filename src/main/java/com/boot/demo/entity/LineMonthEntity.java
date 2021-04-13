@@ -1,24 +1,23 @@
 package com.boot.demo.entity;
 
 import io.swagger.annotations.ApiModel;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.math.BigInteger;
-import java.util.Date;
-
+@JsonInclude
+        (JsonInclude.Include.NON_NULL)
 @Data
-@ApiModel("单月客流结果表实体类")
-public class LineMonthEntity {
-    @ApiModelProperty("查询的年份")
+@ApiModel("单月客流结果表实体类a")
+public class LineMonthEntity {//a
+    @ApiModelProperty("年份")
     private Integer Year;//a_year
-    @ApiModelProperty("查询的线路")
+    @ApiModelProperty("线路")
     private String Line;//line
-    @ApiModelProperty("返回的客流量")
-    private BigInteger Flow;//flow
-    @ApiModelProperty("返回的月份")
+    @ApiModelProperty("客流量")
+    private BigInteger Flow;
+    @ApiModelProperty("月份")
     private Integer Month;//a_month
+    @ApiModelProperty("日期")
+    private Integer Date;//a_date
 }

@@ -5,16 +5,17 @@
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.boot.demo.entity.LineMonthEntity" id="LinemonthMap">
-        <result property="Year" column="a_year"/>
-        <result property="Line" column="line"/>
+<!--        <result property="Year" column="a_year"/>-->
+<!--        <result property="Line" column="line"/>-->
         <result property="Month" column="a_month"/>
         <result property="Flow" column="flow"/>
     </resultMap>
 
 
     <select id="getBYAyl" resultMap="LinemonthMap">
-        SELECT a_month,flow FROM a_1 WHERE a_year = #{Ayear} and line= #{Line}
+        SELECT a_month,flow FROM a_2 WHERE a_year = #{Year} and line= #{Line}
     </select>
+
 
 
 </mapper>

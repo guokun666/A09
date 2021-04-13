@@ -9,7 +9,8 @@ import java.util.List;
 
 public interface LineMonthDao {
 
-    LineMonthEntity getBYAyl(@Param("Year") Integer Year,@Param("Line") String Line);
+    List<LineMonthEntity> getBYAyl(@Param("Year") Integer Year,@Param("Line") String Line);
 
 
 }
+

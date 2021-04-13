@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 /**
  * @author guokun
@@ -18,8 +20,9 @@ public class LineMonthServiceImpl implements LineMonthService {
     private LineMonthDao lineMonthDao;
 
     @Override
-    public LineMonthEntity getBYAyl(Integer a_year, String line) {
+    public List<LineMonthEntity> getBYAyl(Integer a_year, String line) {
         return lineMonthDao.getBYAyl(a_year,line);
     }
+
 }
 
