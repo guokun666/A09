@@ -48,13 +48,21 @@ public class SwaggerConfig {
     @Bean(value = "defaultApi")
     public Docket createRestApi() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
-                .groupName(defaultGroupName)
+//                .groupName(defaultGroupName)
+//                .select()
+//                .apis(RequestHandlerSelectors.basePackage(defaultPackage))
+//                .paths(PathSelectors.regex("/api.*"))
+//                .build();
+//
+                .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(defaultPackage))
-                .paths(PathSelectors.regex("/api.*"))
+                //为任何接口生成API文档
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
                 .build();
         return buildDefaultApi(docket);
     }
+
     @Bean(value = "systemApi")
     public Docket systemApi() {
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
