@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.WeatherDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.WeatherEntity" id="WeatherMap">
+        <result property="year" column="t_year"/>
+        <result property="year" column="b_year"/>
+        <result property="weather" column="weather"/>
+        <result property="flow" column="flow_average"/>
+        <result property="month" column="t_month"/>
+        <result property="line" column="line"/>
+    </resultMap>
+
+
+    <select id="getAllFlowByYear" resultMap="WeatherMap">
+        SELECT all_average FROM b_3 WHERE b_year = #{year}
+    </select>
+
+    <select id="getCardFlowByYear" resultMap="WeatherMap">
+        SELECT weather,flow_average FROM t_3 WHERE t_year = #{year}
+    </select>
+
+    <select id="getZheFlowByYear" resultMap="WeatherMap">
+        SELECT t_month,weather,flow_average FROM t_4 WHERE t_year = #{year}
+    </select>
+
+    <select id="getZhuFlowByYear" resultMap="WeatherMap">
+        SELECT t_month,weather,line,flow_average FROM t_2 WHERE t_year = #{year}
+    </select>
+
+
+    <select id="getAllFlowByYearAndLine" resultMap="WeatherMap">
+        SELECT all_average FROM b_1 WHERE b_year = #{year} AND line = #{line}
+    </select>
+
+    <select id="getCardFlowByYearAndLine" resultMap="WeatherMap">
+        SELECT weather,flow_average FROM t_1 WHERE t_year = #{year} AND line = #{line}
+    </select>
+
+    <select id="getZheFlowByYearAndYear" resultMap="WeatherMap">
+        SELECT t_month,weather,flow_average FROM t_2 WHERE t_year = #{year} AND line = #{line}
+    </select>
+
+</mapper>
