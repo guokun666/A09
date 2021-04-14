@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.UserAgeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.UserAgeEntity" id="userAgeMap">
+        <result property="stationName" column="station_name"/>
+        <result property="lineName" column="line"/>
+        <result property="year" column="d_year"/>
+        <result property="youth" column="youth"/>
+        <result property="midYouth" column="mid_youth"/>
+        <result property="middleAge" column="middle_age"/>
+        <result property="old" column="old"/>
+    </resultMap>
+
+<!--    通过 年份 获取所有线路的用户年龄结构-->
+    <select id="getAllLineUserAgeByYear" resultMap="userAgeMap">
+        SELECT line,youth,mid_youth,middle_age,old
+        FROM d_2
+        WHERE d_year = #{year}
+    </select>
+
+    <select id="getSingleLineUserAgeByYearAndLine" resultMap="userAgeMap">
+        SELECT line,youth,mid_youth,middle_age,old
+        FROM d_2
+        WHERE d_year = #{year} and line = #{line}
+    </select>
+
+    <select id="getStationUserAgeByYearAndLine" resultMap="userAgeMap">
+        SELECT d_1.station_name as station_name,youth,mid_youth,middle_age,old
+        FROM d_1 JOIN station ON d_1.station_name=station.station_name
+        WHERE d_year = #{year} and line_name = #{line}
+    </select>
+
+
+</mapper>

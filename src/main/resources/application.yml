@@ -1,6 +1,8 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+
 #    url: jdbc:mysql://192.168.36.43:3306/bisai?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
 #    username: qidian
 #    password: qd2019B03

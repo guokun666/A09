@@ -22,16 +22,11 @@ import java.util.List;
 @ResponseBody
 @RestController
 @RequestMapping("/LineNetworkDiagram")
-@Api(tags = "A09")
+@Api(tags = "线网图")
 public class LineNetworkDiagramController {
 
     @Autowired
     private LineNetworkDiagramDao lineNetworkDiagramDao;
-
-    /**
-     * restful风格接口，get请求在后面拼接url地址
-     * @return
-     */
 
     @ApiOperation(
             value = "获取整体线网图的数据",
@@ -42,20 +37,23 @@ public class LineNetworkDiagramController {
                     "link[]为固定信息，因此不再返回" )
     @GetMapping("/networkDiagram")
     public Object getNetworkDiagram(){
-        List<LineNetworkDiagramEntity> stations = lineNetworkDiagramDao.getStationInformation();
         List<JSONObject> jsons = new ArrayList<JSONObject>();
+
+        //先获取 线路标题信息
+        List<LineNetworkDiagramEntity> lineTitles = lineNetworkDiagramDao.getStationInformation();
+        //转换成json串
+        for(LineNetworkDiagramEntity lineTitle:lineTitles){
+            jsons.add(lineTitle.getLineTitleJson());
+        }
+
+        //再获取 站点信息
+        List<LineNetworkDiagramEntity> stations = lineNetworkDiagramDao.getLineTitleInformation();
+        //转换成json串
         for(LineNetworkDiagramEntity station:stations){
             jsons.add(station.getStationJson());
         }
-        return jsons;
 
-//        LineNetworkDiagramEntity entity =new LineNetworkDiagramEntity();
-//        String s=entity.getStationJson().toString();
-//        entity.setLineTitleInformation("一号线",1,1,"#000");
-//        s+=entity.getLineTitleJson().toString();
-//        entity.setTrainInformation(8,2,0,"Sta1",2000);
-//        s+=entity.getTrainJson().toString();
-//        return s;
+        return jsons;
     }
 
 

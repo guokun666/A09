@@ -2,7 +2,6 @@ package com.boot.demo.dao;
 
 
 import com.boot.demo.entity.LineNetworkDiagramEntity;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,5 +15,7 @@ import java.util.List;
 public interface LineNetworkDiagramDao {
 
     List<LineNetworkDiagramEntity> getStationInformation();
+
+    List<LineNetworkDiagramEntity> getLineTitleInformation();
 
 }

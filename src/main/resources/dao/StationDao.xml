@@ -17,5 +17,9 @@
         SELECT * FROM station WHERE id = #{stationId}
     </select>
 
+    <select id="getAllStation" resultMap="stationMap">
+        SELECT * FROM station ORDER BY line_name, sequence
+    </select>
+
 
 </mapper>

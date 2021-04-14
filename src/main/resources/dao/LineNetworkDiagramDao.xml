@@ -26,5 +26,10 @@
             WHERE type='station'
     </select>
 
+    <select id="getLineTitleInformation" resultMap="lineNetworkDiagramMap">
+        SELECT text,x,y,label_color
+        FROM line_network_diagram
+        WHERE type='line'
+    </select>
 
 </mapper>

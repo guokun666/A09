@@ -15,13 +15,8 @@ import java.util.List;
 @Repository
 public interface StationDao {
 
-
-
-    /**
-     * 通过ID查询站点名称
-     * @param stationId
-     * @return
-     */
     StationEntity getByStationId(@Param("stationId") String stationId);
 
+    //获取所有站点信息[order by 线路名,序列号]
+    public List<StationEntity> getAllStation();
 }
