@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.HolidayDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.HolidayEntity" id="HolidayMap">
+        <result property="year" column="j_year"/>
+        <result property="holiday" column="holiday"/>
+
+        <result property="line" column="line"/>
+        <result property="station" column="station"/>
+
+        <result property="day_average" column="day_average"/>
+        <result property="holiday_upflow" column="holiday_up_average"/>
+        <result property="workday_upflow" column="workday_up_average"/>
+        <result property="holiday_downflow" column="holiday_down_average"/>
+        <result property="workday_downflow" column="workday_down_average"/>
+    </resultMap>
+
+
+    <select id="getFlowByYear" resultMap="HolidayMap">
+        SELECT holiday, day_average FROM j_1 WHERE j_year = #{year}
+    </select>
+
+    <select id="getHolidayFlowByYear" resultMap="HolidayMap">
+        SELECT line, holiday, day_average FROM j_2 WHERE j_year = #{year}
+    </select>
+
+    <select id="getDuanFLowByLine" resultMap="HolidayMap">
+
+    </select>
+
+
+</mapper>
