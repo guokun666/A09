@@ -9,13 +9,14 @@
         <result property="year" column="b_year"/>
         <result property="weather" column="weather"/>
         <result property="flow" column="flow_average"/>
+        <result property="flow" column="all_average"/>
         <result property="month" column="t_month"/>
         <result property="line" column="line"/>
     </resultMap>
 
 
     <select id="getAllFlowByYear" resultMap="WeatherMap">
-        SELECT all_average FROM b_3 WHERE b_year = #{year}
+        SELECT all_average FROM b_3 WHERE b_year = #{year} LIMIT 1
     </select>
 
     <select id="getCardFlowByYear" resultMap="WeatherMap">
@@ -32,7 +33,7 @@
 
 
     <select id="getAllFlowByYearAndLine" resultMap="WeatherMap">
-        SELECT all_average FROM b_1 WHERE b_year = #{year} AND line = #{line}
+        SELECT all_average FROM b_1 WHERE b_year = #{year} AND line = #{line} LIMIT 1
     </select>
 
     <select id="getCardFlowByYearAndLine" resultMap="WeatherMap">

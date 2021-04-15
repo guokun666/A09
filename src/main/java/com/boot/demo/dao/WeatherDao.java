@@ -17,7 +17,7 @@ public interface WeatherDao {
      /*
      全年的日均客流
       */
-     List<WeatherEntity> getAllFlowByYear(@Param("year") Integer year);
+     WeatherEntity getAllFlowByYear(@Param("year") Integer year);
 
      /*
      全年各个天气的日均客流
@@ -37,7 +37,7 @@ public interface WeatherDao {
      /*
      单线路--卡片客流，全年日均
       */
-     List<WeatherEntity> getAllFlowByYearAndLine(@Param("year") Integer year, @Param("line") String line);
+     WeatherEntity getAllFlowByYearAndLine(@Param("year") Integer year, @Param("line") String line);
 
      /*
      单线路--卡片客流，各个天气

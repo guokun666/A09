@@ -7,6 +7,25 @@ import java.math.BigInteger;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class WeatherEntity {
+    //晴天 1  阴天 2 雨天 3
+    public final static String[] WeatherString={
+        "天气属性：晴天（1）,阴天（2）,雨天（3）",
+            "晴天", "阴天", "雨天"
+    };
+
+
+    public static String weatherIDtoString(Integer weatherID){
+      if(weatherID>=1&&weatherID<=WeatherString.length)return WeatherString[weatherID];
+      else return null;
+    };
+
+    public static Integer weatherStringToID(String weather){
+        for(int i=1;i<WeatherString.length;i++){
+            if(weather==WeatherString[i])return i;
+        }
+        return null;
+    }
+
     /*
     输入参数
      */
@@ -15,7 +34,7 @@ public class WeatherEntity {
     /*
     天气属性
      */
-    private String weather;
+    private Integer weather;
 
     /*
     客流值
