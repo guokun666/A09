@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class HolidayController {
 
     @Autowired
-    private HolidayService HolidayService;
+    private HolidayService holidayService;
 
     @ApiOperation(value = "节假日分析（3个图的数据）",
             notes = "2020-4-14\n" +
@@ -37,7 +37,7 @@ public class HolidayController {
         目前还只返回了单线路上下行
          */
         //return HolidayService.getHolidayFlowByYear(year);
-        return HolidayService.getDuanFLowByLine(year, line);
+        return holidayService.getDuanFLowByLine(year, line);
     }
 
 }

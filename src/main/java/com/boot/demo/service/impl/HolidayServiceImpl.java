@@ -17,21 +17,21 @@ import java.util.List;
 @Service
 public class HolidayServiceImpl implements HolidayService {
     @Autowired
-    private HolidayDao HolidayDao;
+    private HolidayDao holidayDao;
 
     /*
     以下是城市
      */
     @Override
-    public List<HolidayEntity> getFlowByYear(Integer year) { return HolidayDao.getFlowByYear(year); }
+    public List<HolidayEntity> getFlowByYear(Integer year) { return holidayDao.getFlowByYear(year); }
 
     @Override
-    public List<HolidayEntity> getHolidayFlowByYear(Integer year) { return HolidayDao.getHolidayFlowByYear(year); }
+    public List<HolidayEntity> getHolidayFlowByYear(Integer year) { return holidayDao.getHolidayFlowByYear(year); }
 
     /*
     以下是单线路
      */
     @Override
-    public List<HolidayEntity> getDuanFLowByLine(Integer year, String line){return HolidayDao.getDuanFLowByLine(year,line);}
+    public List<HolidayEntity> getDuanFLowByLine(Integer year, String line){return holidayDao.getDuanFLowByLine(year,line);}
 }
 

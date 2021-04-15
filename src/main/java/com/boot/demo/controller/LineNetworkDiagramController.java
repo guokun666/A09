@@ -1,6 +1,7 @@
 package com.boot.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.boot.demo.components.common.base.BaseResult;
 import com.boot.demo.dao.LineNetworkDiagramDao;
 import com.boot.demo.entity.LineNetworkDiagramEntity;
 import io.swagger.annotations.Api;
@@ -32,7 +33,7 @@ public class LineNetworkDiagramController {
     @ApiOperation(
             value = "获取整体线网图的数据",
             notes = "修改时间：2020-4-13\n" +
-                    "这里需要两个参数：起始时间戳 终止时间戳" +
+                    "这里需要两个参数：起始时间戳 终止时间戳(BigInteger)" +
                     "如果不传参数也可以，目前是返回固定内容" +
                     "返回的数据只有一组数据：Data[]\n" +
                     "（线路标题 和 站点信息）\n" +
@@ -56,7 +57,7 @@ public class LineNetworkDiagramController {
             jsons.add(station.getStationJson());
         }
 
-        return jsons;
+        return BaseResult.ok(jsons);
     }
 
 

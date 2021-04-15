@@ -1,6 +1,7 @@
 package com.boot.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.boot.demo.components.common.base.BaseResult;
 import com.boot.demo.entity.UserAgeEntity;
 import com.boot.demo.service.UserAgeService;
 import io.swagger.annotations.Api;
@@ -38,7 +39,7 @@ public class UserAgeController {
                     "通过输入一个参数 年份（int） 获取所有线路用户年龄结构信息(lineUserAge[])")
     @GetMapping("city")
     public Object getAllLineUserAgeByYear(@RequestParam("year") Integer year){
-        return userAgeService.getUserAgeInformation(year,null);
+        return BaseResult.ok(userAgeService.getUserAgeInformation(year,null));
     }
 
     //通过 年份、线路名 获取该线路的用户年龄结构柱状图信息 以及 表格信息
@@ -52,11 +53,8 @@ public class UserAgeController {
     public Object getSignalLineUserAge(@RequestParam("year") Integer year,
                                        @RequestParam("lineID") Integer lineID){
         String line=lineID+"号线";
-        if(INDEX_OF_STRINGS(LINE_NAME,line)==-1){//线路输入不合法{
-            JSONObject js400=new JSONObject(true);
-            js400.put("code",400);
-            js400.put("msg","线路不存在！请重试！");
-        }
+        if(INDEX_OF_STRINGS(LINE_NAME,line)==-1)//线路输入不合法{
+            return BaseResult.error("线路输入不合法，请传入线路的阿拉伯数字！");
 
         JSONObject bar = userAgeService.getUserAgeInformation(year,line);
         List<JSONObject> table = new ArrayList<>();
@@ -105,7 +103,7 @@ public class UserAgeController {
         json.put("table",table);
         json.put("bar",bar);
 
-        return  json;
+        return  BaseResult.ok(json);
     }
 
 
