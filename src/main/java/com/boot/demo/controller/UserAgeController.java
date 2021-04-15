@@ -45,11 +45,13 @@ public class UserAgeController {
     @ApiOperation(
             value = "单线路-用户年龄结构信息",
             notes = "修改时间：2020-4-13\n" +
-                    "通过输入两个参数 年份，线路名 获取所有线路用户年龄结构信息\n" +
+                    "通过输入两个参数 年份year，线路lineID" +
+                    " 获取所有线路用户年龄结构信息\n" +
                     "返回两个数组 table[] 和 bar[] 分别表示 表数据 和 柱状图数据\n")
     @GetMapping("signal_line")
     public Object getSignalLineUserAge(@RequestParam("year") Integer year,
-                                       @RequestParam("line") String line){
+                                       @RequestParam("lineID") Integer lineID){
+        String line=lineID+"号线";
         if(INDEX_OF_STRINGS(LINE_NAME,line)==-1){//线路输入不合法{
             JSONObject js400=new JSONObject(true);
             js400.put("code",400);
