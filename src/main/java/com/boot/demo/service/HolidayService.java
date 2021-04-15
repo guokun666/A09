@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * @author guokun
+ * @author CWZ
  */
 @Service
 public interface HolidayService {
     /*
-    以下是历史查询--城市线网--天气
+    以下是历史查询--城市线网--节假日
      */
 
     public List<HolidayEntity> getFlowByYear(Integer year);
@@ -20,11 +20,11 @@ public interface HolidayService {
 
 
     /*
-    以下是历史查询--单线路详情--天气
+    以下是历史查询--单线路详情--节假日
      */
-   // public List<HolidayEntity> getAllFlowByYearAndLine(Integer year, String line);
 
-   // public List<HolidayEntity> getCardFlowByYearAndLine(Integer year, String line);
+   public List<HolidayEntity> getDuanFLowByLine(Integer year, String line);
+
 
 }
 

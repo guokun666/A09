@@ -12,8 +12,10 @@
         <result property="station" column="station"/>
 
         <result property="day_average" column="day_average"/>
-        <result property="holiday_upflow" column="holiday_up_average"/>
-        <result property="workday_upflow" column="workday_up_average"/>
+        <result property="holiday_flow" column="holiday_average"/>
+        <result property="workday_flow" column="workday_average"/>
+        <result property="holiday_flow" column="holiday_up_average"/>
+        <result property="workday_flow" column="workday_up_average"/>
         <result property="holiday_downflow" column="holiday_down_average"/>
         <result property="workday_downflow" column="workday_down_average"/>
     </resultMap>
@@ -24,11 +26,13 @@
     </select>
 
     <select id="getHolidayFlowByYear" resultMap="HolidayMap">
-        SELECT line, holiday, day_average FROM j_2 WHERE j_year = #{year}
+        SELECT line, holiday_average, workday_average FROM j_2 WHERE j_year = #{year}
     </select>
 
     <select id="getDuanFLowByLine" resultMap="HolidayMap">
-
+        SELECT station,holiday_up_average,workday_up_average,holiday_down_average,workday_down_average
+        FROM j_3
+        WHERE j_year = #{year} AND line = #{line}
     </select>
 
 

@@ -31,6 +31,7 @@ public class HolidayServiceImpl implements HolidayService {
     /*
     以下是单线路
      */
-//    @Override
+    @Override
+    public List<HolidayEntity> getDuanFLowByLine(Integer year, String line){return HolidayDao.getDuanFLowByLine(year,line);}
 }
 

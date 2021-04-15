@@ -21,7 +21,7 @@ public class WeatherController {
     @Autowired
     private WeatherService WeatherService;
 
-    @ApiOperation(value = "城市线网界面--天气分析（3个图的数据）",
+    @ApiOperation(value = "天气分析（3个图的数据）",
             notes = "2020-4-14\n" +
                     "城市界面有4个接口需要转换:\n" +
                     "全年日均客流\n" +

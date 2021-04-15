@@ -25,9 +25,9 @@ public class HolidayEntity {
      */
     private BigInteger day_average;
 
-    private BigInteger holiday_upflow;
+    private BigInteger holiday_flow;
 
-    private BigInteger workday_upflow;
+    private BigInteger workday_flow;
 
     private BigInteger holiday_downflow;
 
