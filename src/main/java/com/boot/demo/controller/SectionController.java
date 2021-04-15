@@ -21,7 +21,7 @@ public class SectionController {
 
 
     @GetMapping("/section")
-    @ApiOperation(value = "展示线路断面", notes = "")
+    @ApiOperation(value = "单线路-展示线路断面", notes = "")
     public Object getSection(@RequestParam("time") String time,@RequestParam("singleline") String singleline) {
         return sectionService.getSection(time,singleline);
     }

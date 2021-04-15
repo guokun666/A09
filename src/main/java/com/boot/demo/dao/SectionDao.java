@@ -11,7 +11,8 @@ import java.util.List;
 public interface SectionDao {
 
 
-    List<SectionEntity> getSection(@Param("time")String time,@Param("singleline")String singleline);
-
+    List<SectionEntity> getSectionList(@Param("time")String time,@Param("singleline")String singleline);
+    List<SectionEntity> getTopUp(@Param("time")String time,@Param("singleline")String singleline);
+    List<SectionEntity> getTopDown(@Param("time")String time,@Param("singleline")String singleline);
 }
 

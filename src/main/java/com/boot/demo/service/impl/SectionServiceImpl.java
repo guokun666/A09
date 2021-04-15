@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -21,7 +22,10 @@ public class SectionServiceImpl implements SectionService {
 
     @Override
     public List<SectionEntity> getSection(String time_slot,String line) {//数据库的字段名
-        return sectionDao.getSection(time_slot,line);
+        List<SectionEntity> a=sectionDao.getSectionList(time_slot,line);
+        a.addAll(sectionDao.getTopUp(time_slot,line));
+        a.addAll(sectionDao.getTopDown(time_slot,line));
+        return a;
     }
 
 
