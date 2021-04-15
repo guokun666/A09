@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class CommonConstants {
         //------------------------------------------
+
+
         public final static String[] LINE_NAME = {"1号线", "2号线", "3号线", "4号线", "5号线", "10号线", "11号线", "12号线"};
         public final static Integer LINE_NUMBERS = LINE_NAME.length;//线路数量
         public static Integer INDEX_OF_STRINGS(String[] list, String str){
@@ -19,6 +21,19 @@ public class CommonConstants {
                 if(str.equals(list[i]))
                     return i;//返回对应线路所对应的索引号
             return -1;//不存在返回-1
+        }
+
+        //获取字符串中第一串数字的值
+        public static Integer STRING_TO_INT(String s){
+            int begin=-1,end=-1;
+            for(int i=0;i<s.length();i++){
+                if(s.charAt(i)>'0'&&s.charAt(i)<'9'){
+                    if(begin==-1)begin=i;
+                    end=i;
+                }else if(end!=-1)break;
+            }
+            if(begin==-1||end==-1)return -1;
+            return Integer.parseInt(s.substring(begin,end+1));
         }
 
     public final static String[] STATION_OF_LINE_1={

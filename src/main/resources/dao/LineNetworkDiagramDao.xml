@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.LineNetworkDiagramDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.LineNetworkDiagramEntity" id="lineNetworkDiagramMap">
+        <result property="text" column="text"/>
+        <result property="size" column="size"/>
+        <result property="positionX" column="x"/>
+        <result property="positionY" column="y"/>
+        <result property="labelColor" column="label_color"/>
+        <result property="labelPosition" column="label_position"/>
+        <result property="internalColor" column="internal_color"/>
+        <result property="borderCorlor" column="border_color"/>
+        <result property="borderWidth" column="border_width"/>
+        <result property="rotate" column="rotate"/>
+        <result property="weight" column="weight"/>
+        <result property="nextStation" column="text"/>
+    </resultMap>
+
+
+    <select id="getStationInformation" resultMap="lineNetworkDiagramMap">
+            SELECT text,size,x,y,label_position,internal_color,border_color
+            FROM line_network_diagram
+            WHERE type='station'
+    </select>
+
+    <select id="getLineTitleInformation" resultMap="lineNetworkDiagramMap">
+        SELECT text,x,y,label_color
+        FROM line_network_diagram
+        WHERE type='line'
+    </select>
+
+</mapper>

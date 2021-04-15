@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.StationDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.StationEntity" id="stationMap">
+        <result property="stationId" column="id"/>
+        <result property="stationName" column="station_name"/>
+        <result property="districtName" column="district"/>
+        <result property="lineName" column="line_name"/>
+        <result property="sequenceNumber" column="sequence"/>
+    </resultMap>
+
+
+    <select id="getByStationId" resultMap="stationMap">
+        SELECT * FROM station WHERE id = #{stationId}
+    </select>
+
+    <select id="getAllStation" resultMap="stationMap">
+        SELECT * FROM station ORDER BY line_name, sequence
+    </select>
+
+
+</mapper>
