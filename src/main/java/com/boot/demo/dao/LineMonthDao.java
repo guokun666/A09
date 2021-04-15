@@ -9,8 +9,11 @@ import java.util.List;
 
 public interface LineMonthDao {
 
-    List<LineMonthEntity> getBYAyl(@Param("Year") Integer Year,@Param("Line") String Line);
+    List<LineMonthEntity> getBYAyl(@Param("year") Integer year,@Param("singleline") String singleline);
 
-
+List<LineMonthEntity> getByMonth(@Param("year") Integer year,@Param("singleline") String singleline,@Param("month") Integer month);
+    List<LineMonthEntity> getCitymonth(@Param("year") Integer year);
+    List<LineMonthEntity> getCityline(@Param("year") Integer year,@Param("month")Integer month);
+    List<LineMonthEntity> getCitydate(@Param("year")Integer year,@Param("month")Integer month);
 }
 

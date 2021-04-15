@@ -11,13 +11,13 @@ import java.math.BigInteger;
 @ApiModel("单月客流结果表实体类a")
 public class LineMonthEntity {//a
     @ApiModelProperty("年份")
-    private Integer Year;//a_year
+    private Integer year;//a_year
     @ApiModelProperty("线路")
-    private String Line;//line
+    private String singleline;//line
     @ApiModelProperty("客流量")
-    private BigInteger Flow;
+    private BigInteger flow;
     @ApiModelProperty("月份")
-    private Integer Month;//a_month
+    private Integer month;//a_month
     @ApiModelProperty("日期")
-    private Integer Date;//a_date
+    private Integer date;//a_date
 }

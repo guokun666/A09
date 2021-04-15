@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.StationflowDao">
+
+	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
+    <resultMap type="com.boot.demo.entity.StationflowEntity" id="StationflowMap">
+<result property="year" column="c_year"/>
+     <result property="date" column="c_day"/>
+        <result property="month" column="c_month"/>
+        <result property="singleline" column="line"/>
+        <result property="flow_in" column="flow_in"/>
+        <result property="flow_out" column="flow_out"/>
+        <result property="time" column="year_month_day_hour"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+
+    <select id="getStationflow" resultMap="StationflowMap">
+        SELECT sum(flow_in) as flow_in,sum(flow_out) as flow_out
+        FROM c_1 WHERE c_year = #{year} and line= #{singleline} and station_name= #{station}
+    </select>
+    <select id="getStationyear" resultMap="StationflowMap">
+        SELECT  flow_in, flow_out,c_month
+        FROM c_1 WHERE c_year = #{year} and line= #{singleline} and station_name= #{station}
+    </select>
+    <select id="getStationmonth" resultMap="StationflowMap">
+        SELECT  flow_in, flow_out,c_day
+        FROM c_2 WHERE c_year = #{year} and line= #{singleline} and station_name= #{station} and c_month= #{month}
+    </select>
+    <select id="getStationIn" resultMap="StationflowMap">
+        SELECT  flow_in,time(year_month_day_hour) as time
+        FROM c_3 WHERE year(year_month_day_hour) = #{year} and line= #{singleline} and station_name= #{station} and
+        month(year_month_day_hour)= #{month} and day(year_month_day_hour)= #{date}
+    </select>
+    <select id="getStationOut" resultMap="StationflowMap">
+        SELECT  flow_out,time(year_month_day_hour) as time
+        FROM c_4 WHERE year(year_month_day_hour) = #{year} and line= #{singleline} and station_name= #{station} and
+        month(year_month_day_hour)= #{month} and day(year_month_day_hour)= #{date}
+    </select>
+
+
+</mapper>

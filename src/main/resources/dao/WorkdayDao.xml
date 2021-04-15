@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.WorkdayDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.WorkdayEntity" id="WorkdayMap">
+<result property="year" column="b_year"/>
+     <result property="date" column="b_date"/>
+        <result property="month" column="b_month"/>
+        <result property="singleline" column="line"/>
+        <result property="workday" column="workday_average"/>
+        <result property="weekend" column="weekend_average"/>
+        <result property="all" column="all_average"/>
+    </resultMap>
+
+
+    <select id="getYear" resultMap="WorkdayMap">
+        SELECT workday_average,weekend_average,all_average FROM b_3 WHERE b_year = #{year}
+    </select>
+    <select id="getMonth" resultMap="WorkdayMap">
+        SELECT workday_average,weekend_average,b_month FROM b_4 WHERE b_year = #{year}
+    </select>
+    <select id="getLine" resultMap="WorkdayMap">
+        SELECT workday_average,weekend_average,line FROM b_1 WHERE b_year = #{year}
+    </select>
+    <select id="getSingleyear" resultMap="WorkdayMap">
+        SELECT workday_average,weekend_average,all_average FROM b_1 WHERE b_year = #{year} and line= #{singleline}
+    </select>
+    <select id="getSinglemonth" resultMap="WorkdayMap">
+        SELECT workday_average,weekend_average,b_month FROM b_2 WHERE b_year = #{year} and line= #{singleline}
+    </select>
+
+</mapper>

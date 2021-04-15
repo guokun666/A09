@@ -23,6 +23,22 @@ public class LineMonthServiceImpl implements LineMonthService {
     public List<LineMonthEntity> getBYAyl(Integer a_year, String line) {
         return lineMonthDao.getBYAyl(a_year,line);
     }
+    @Override
+    public List<LineMonthEntity> getByMonth(Integer a_year, String line,Integer a_month) {
+        return lineMonthDao.getByMonth(a_year,line,a_month);
+    }
+    @Override
+    public List<LineMonthEntity> getCitymonth(Integer a_year) {
+        return lineMonthDao.getCitymonth(a_year);
+    }
+    @Override
+    public List<LineMonthEntity> getCityline(Integer a_year,Integer a_month ) {
+        return lineMonthDao.getCityline(a_year,a_month);
+    }
+    @Override
+    public List<LineMonthEntity> getCitydate(Integer a_year,Integer a_month ) {
+        return lineMonthDao.getCitydate(a_year,a_month);
+    }
 
 }
 

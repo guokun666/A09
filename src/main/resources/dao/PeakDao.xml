@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.PeakDao">
+
+	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
+    <resultMap type="com.boot.demo.entity.PeakEntity" id="PeakMap">
+<result property="year" column="e_year"/>
+     <result property="date" column="e_day"/>
+        <result property="month" column="e_month"/>
+        <result property="singleline" column="line"/>
+        <result property="flow" column="flow"/>
+        <result property="time" column="time_slot"/>
+        <result property="moringpercentage" column="moringpercentage"/>
+        <result property="eveningpercentage" column="eveningpercentage"/>
+    </resultMap>
+
+
+    <select id="getCityPeak" resultMap="PeakMap">
+        SELECT flow ,line,time_slot
+        FROM e_2 WHERE e_year = #{year}
+    </select>
+    <select id="getCityPercentage" resultMap="PeakMap">
+        SELECT concat(((select sum(flow) from e_2 where time_slot between 7 and 9 and e_year= #{year})/(select sum(flow) from e_2 where e_year=#{year}))*100 ,'%') as moringpercentage,
+         concat(((select sum(flow) from e_2 where time_slot between 17 and 19 and e_year= #{year})/(select sum(flow) from e_2 where e_year=#{year}))*100 ,'%') as eveningpercentage
+        FROM e_2  where e_year= #{year} group by e_year
+
+    </select>
+
+    <select id="getLinePeak" resultMap="PeakMap">
+        SELECT flow ,time_slot
+        FROM e_2 WHERE e_year = #{year} and line= #{singleline}
+    </select>
+    <select id="getLinePercentage" resultMap="PeakMap">
+        SELECT concat(((select sum(flow) from e_2 where time_slot between 7 and 9 and e_year= #{year} and line=#{singleline})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline}))*100 ,'%') as moringpercentage,
+        concat(((select sum(flow) from e_2 where time_slot between 17 and 19 and e_year= #{year} and line=#{singleline})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline}))*100 ,'%') as eveningpercentage
+        FROM e_2  where e_year= #{year} group by e_year
+
+    </select>
+    <select id="getLineMonthPeak" resultMap="PeakMap">
+        SELECT flow ,time_slot
+        FROM e_1 WHERE e_year = #{year} and line= #{singleline} and e_month= #{month}
+    </select>
+    <select id="getLineMonthPercentage" resultMap="PeakMap">
+        SELECT concat(((select sum(flow) from e_2 where time_slot between 7 and 9 and e_year= #{year} and line=#{singleline} and e_month= #{month})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline} and e_month= #{month}))*100 ,'%') as moringpercentage,
+        concat(((select sum(flow) from e_2 where time_slot between 17 and 19 and e_year= #{year} and line=#{singleline})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline}))*100 ,'%') as eveningpercentage
+        FROM e_1  where e_year= #{year}  and e_month= #{month} group by e_year
+
+    </select>
+
+</mapper>
