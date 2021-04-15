@@ -17,7 +17,7 @@ public class PeakEntity {//e
     @ApiModelProperty("线路")
     private String singleline;//line
     @ApiModelProperty("客流")
-    private BigInteger flow;//flow
+    private Integer flow;//flow
     @ApiModelProperty("时间段")
     private String time;//time_slot
     @ApiModelProperty("早占比")

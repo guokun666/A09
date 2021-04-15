@@ -7,6 +7,7 @@
     <resultMap type="com.boot.demo.entity.StationflowEntity" id="StationflowMap">
 <result property="year" column="c_year"/>
      <result property="date" column="c_day"/>
+        <result property="station" column="station_name"/>
         <result property="month" column="c_month"/>
         <result property="singleline" column="line"/>
         <result property="flow_in" column="flow_in"/>
@@ -38,6 +39,13 @@
         FROM c_4 WHERE year(year_month_day_hour) = #{year} and line= #{singleline} and station_name= #{station} and
         month(year_month_day_hour)= #{month} and day(year_month_day_hour)= #{date}
     </select>
-
+    <select id="getTopIn" resultMap="StationflowMap">
+        SELECT  sum(flow_in) as flow_in,station_name
+        FROM c_1 WHERE c_year = #{year} and line= #{singleline} group by station_name order by flow_in desc limit 3
+    </select>
+    <select id="getTopOut" resultMap="StationflowMap">
+        SELECT  sum(flow_out) as flow_out,station_name
+        FROM c_1 WHERE c_year = #{year} and line= #{singleline} group by station_name order by flow_out desc limit 3
+    </select>
 
 </mapper>

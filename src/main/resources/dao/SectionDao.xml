@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.SectionDao">
+
+	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
+    <resultMap type="com.boot.demo.entity.SectionEntity" id="SectionMap">
+
+        <result property="singleline" column="line"/>
+        <result property="flow_up" column="upward_flow"/>
+        <result property="flow_down" column="downward_flow"/>
+        <result property="time" column="time_slot"/>
+        <result property="station" column="station_name"/>
+
+    </resultMap>
+    <select id="getSection" resultMap="SectionMap">
+        SELECT upward_flow,downward_flow,station_name
+        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station1 where line_name= #{singleline} )
+    </select>
+
+
+
+</mapper>

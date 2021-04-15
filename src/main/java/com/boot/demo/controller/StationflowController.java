@@ -45,6 +45,11 @@ public class StationflowController {
                                   @RequestParam("date")Integer date) {
         return StationflowService.getStationday(year,singleline,station,month,date);
     }
+    @GetMapping("/station/top")
+    @ApiOperation(value = "根据年份进出站客流前三", notes = "")
+    public Object getTop(@RequestParam("year") Integer year,@RequestParam("singleline")String singleline) {
+        return StationflowService.getTop(year,singleline);
+    }
 
 
 

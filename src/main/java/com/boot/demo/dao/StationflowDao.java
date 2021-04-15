@@ -15,13 +15,15 @@ public interface StationflowDao {
     List<StationflowEntity> getStationyear(@Param("year")Integer year,@Param("singleline")String singleline,
                                            @Param("station")String station_name);
     List<StationflowEntity> getStationmonth(@Param("year")Integer year,@Param("singleline")String singleline,
-                                           @Param("station")String station_name,@Param("month") Integer month);
+                                           @Param("station")String station,@Param("month") Integer month);
     List<StationflowEntity> getStationIn(@Param("year")Integer year,@Param("singleline")String singleline,
-                                            @Param("station")String station_name,@Param("month") Integer month
+                                            @Param("station")String station,@Param("month") Integer month
             ,@Param("date")Integer date);
 
     List<StationflowEntity> getStationOut(@Param("year")Integer year,@Param("singleline")String singleline,
-                                          @Param("station")String station_name,@Param("month") Integer month
+                                          @Param("station")String station,@Param("month") Integer month
             ,@Param("date")Integer date);
+    List<StationflowEntity> getTopIn(@Param("year")Integer year,@Param("singleline")String singleline);
+    List<StationflowEntity> getTopOut(@Param("year")Integer year,@Param("singleline")String singleline);
 }
 
