@@ -1,9 +1,7 @@
 package com.boot.demo.service;
 
-import com.boot.demo.entity.HolidayEntity;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author CWZ
@@ -14,16 +12,16 @@ public interface HolidayService {
     以下是历史查询--城市线网--节假日
      */
 
-    public List<HolidayEntity> getFlowByYear(Integer year);
+    public JSONObject getFlowByYear(Integer year);
 
-    public List<HolidayEntity> getHolidayFlowByYear(Integer year);
+    public JSONObject getAllLineHolidayAndWorkdayFlowByYear(Integer year);
 
 
     /*
     以下是历史查询--单线路详情--节假日
      */
 
-   public List<HolidayEntity> getDuanFLowByLine(Integer year, String line);
+   public JSONObject getDuanFLowByLine(Integer year, String line);
 
 
 }

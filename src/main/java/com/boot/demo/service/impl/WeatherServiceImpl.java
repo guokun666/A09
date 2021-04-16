@@ -104,7 +104,7 @@ public class WeatherServiceImpl implements WeatherService {
         List<BigInteger>cloudyData=Arrays.asList(new BigInteger[CommonConstants.LINE_NUMBERS]);
         List<BigInteger>rainyData=Arrays.asList(new BigInteger[CommonConstants.LINE_NUMBERS]);
         s.put("name","晴天");
-        s.put("type","line");
+        s.put("type","bar");
         s.put("data",sunnyData);
 
         for(WeatherEntity w:weatherEntities){

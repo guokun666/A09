@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 /**
- * @author CWZ
- * @date 2021-4-14
+ * @author guokun
+ * @date 2021-4-15
  */
 @Slf4j
 @RestController
@@ -30,11 +30,7 @@ public class WeatherController {
                     "全年日均客流\n" +
                     "全年各天气日均客流\n" +
                     "2020年天气--各月份日均流量走势折线图(字段名格式必须一致)\n" +
-                    "2020年天气--各线路日均流量走势集合柱状图(字段名格式必须一致)\n" +
-                    "单线路界面有3个接口需要转换\n" +
-                    "单线路全年日均客流\n" +
-                    "单线路各天气日均客流\n" +
-                    "单线路各月份日均客流量走势(字段名格式必须一致)\n")
+                    "2020年天气--各线路日均流量走势集合柱状图(字段名格式必须一致)\n")
     @GetMapping("/city")
     public Object getByYear(@RequestParam("year") Integer year){
         JSONObject json = new JSONObject(true);
@@ -49,7 +45,11 @@ public class WeatherController {
 
     @ApiOperation(value = "单线路-天气",
             notes = "2020-4-15\n" +
-                    "三个单线路天气接口\n")
+                    "三个单线路天气接口\n"+
+                    "单线路界面有3个接口需要转换\n" +
+                    "单线路全年日均客流\n" +
+                    "单线路各天气日均客流\n" +
+                    "单线路各月份日均客流量走势(字段名格式必须一致)\n")
     @GetMapping("/signal_line")
     public Object getByYear(@RequestParam("year") Integer year,@RequestParam("lineID") Integer lineID){
         JSONObject json = new JSONObject(true);

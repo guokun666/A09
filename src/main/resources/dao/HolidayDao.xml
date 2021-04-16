@@ -25,7 +25,7 @@
         SELECT holiday, day_average FROM j_1 WHERE j_year = #{year}
     </select>
 
-    <select id="getHolidayFlowByYear" resultMap="HolidayMap">
+    <select id="getAllLineHolidayAndWorkdayFlowByYear" resultMap="HolidayMap">
         SELECT line, holiday_average, workday_average FROM j_2 WHERE j_year = #{year}
     </select>
 

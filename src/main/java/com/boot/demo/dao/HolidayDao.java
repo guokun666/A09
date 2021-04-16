@@ -22,7 +22,7 @@ public interface HolidayDao {
      /*
      各线路所有节假日日均客流量与工作日对比情况
       */
-     List<HolidayEntity> getHolidayFlowByYear(@Param("year") Integer year);
+     List<HolidayEntity> getAllLineHolidayAndWorkdayFlowByYear(@Param("year") Integer year);
 
      /*
      单线路--节假日高峰小时断面量（上行）

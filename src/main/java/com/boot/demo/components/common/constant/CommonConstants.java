@@ -15,12 +15,21 @@ public class CommonConstants {
 
         public final static String[] LINE_NAME = {"1号线", "2号线", "3号线", "4号线", "5号线", "10号线", "11号线", "12号线"};
         public final static String[] MONTH = {"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
+        public final static String[] HOLIDAT ={"元旦","春节","清明","五一","端午"};
         public final static Integer LINE_NUMBERS = LINE_NAME.length;//线路数量
         public static Integer INDEX_OF_STRINGS(String[] list, String str){
             if(str==null)return -1;
             for(int i=0;i<list.length;i++)
                 if(str.equals(list[i]))
-                    return i;//返回对应线路所对应的索引号
+                    return i;//返回对应字符串所对应的索引号
+            return -1;//不存在返回-1
+        }
+
+        public static <T> Integer INDEX_OF_LIST(List<T> list, T it){
+            if(it==null)return -1;
+            for(int i=0;i<list.size();i++)
+                if(it.equals(list.get(i)))
+                    return i;//返回对应元素所对应的索引号
             return -1;//不存在返回-1
         }
 
