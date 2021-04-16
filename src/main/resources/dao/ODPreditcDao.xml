@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.ODPreditcDao">
+
+	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
+    <resultMap type="com.boot.demo.entity.ODPreditcEntity" id="ODPreditcMap">
+<result property="day" column="y_day"/>
+        <result property="flow" column="flow"/>
+
+        <result property="origin" column="origin"/>
+        <result property="destination" column="destination"/>
+        <result property="line" column="line"/>
+    </resultMap>
+
+
+    <select id="getOD" resultMap="ODPreditcMap">
+        SELECT origin,destination,line,flow
+        FROM y_5 WHERE y_day = #{day} and line= #{line}
+    </select>
+
+</mapper>
