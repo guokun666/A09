@@ -50,17 +50,17 @@ public class WeatherController {
                     "单线路全年日均客流\n" +
                     "单线路各天气日均客流\n" +
                     "单线路各月份日均客流量走势(字段名格式必须一致)\n")
-    @GetMapping("/signal_line")
-    public Object getByYear(@RequestParam("year") Integer year,@RequestParam("lineID") Integer lineID){
-        JSONObject json = new JSONObject(true);
+        return BaseResult.ok(json);
+
+        json.put("lineChart",weatherService.getZheFlowByYearAndLine(year,line));
+        json.put("cardChart",weatherService.getCardFlowByYearAndLine(year,line));
+        json.put("allAverageFlow",weatherService.getAllFlowByYearAndLine(year,line));
 
         String line= lineID+"号线";
 
-        json.put("allAverageFlow",weatherService.getAllFlowByYearAndLine(year,line));
-        json.put("cardChart",weatherService.getCardFlowByYearAndLine(year,line));
-        json.put("lineChart",weatherService.getZheFlowByYearAndLine(year,line));
-
-        return BaseResult.ok(json);
+        JSONObject json = new JSONObject(true);
+    public Object getByYear(@RequestParam("year") Integer year,@RequestParam("lineID") Integer lineID){
+    @GetMapping("/signal_line")
     }
 
 }

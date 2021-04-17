@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.InstantaneousDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.InstantaneousEntity" id="InstantaneousMap">
+        <result property="time" column="time_slot"/>
+        <result property="station" column="station_name"/>
+
+        <result property="flow_in" column="flow_in"/>
+        <result property="flow_out" column="flow_out"/>
+
+
+    </resultMap>
+
+
+    <select id="getDayFlowByDayAndStation" resultMap="InstantaneousMap">
+        SELECT flow_in, flow_out FROM i_dayin, i_dayout
+        WHERE
+        i_dayin.time_slot = #{time} AND
+        i_dayout.time_slot = #{time} AND
+        i_dayin.station_name=#{station} AND
+        i_dayout.station_name=#{station}
+    </select>
+
+    <select id="getYearFlowByYearAndStation" resultMap="InstantaneousMap">
+        SELECT flow_in, flow_out FROM i_yearin, i_yearout
+        WHERE
+        i_yearin.time_slot = #{year} AND
+        i_yearout.time_slot = #{year} AND
+        i_yearin.station_name=#{station} AND
+        i_yearout.station_name=#{station}
+    </select>
+
+
+</mapper>
