@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class WeatherController {
 
     @Autowired
-    private WeatherService WeatherService;
+    private WeatherService weatherService;
 
     @ApiOperation(value = "天气分析（3个图的数据）",
             notes = "2020-4-14\n" +
@@ -37,10 +37,10 @@ public class WeatherController {
         /*
         目前还只返回了全年日均客流卡片数据
          */
-        //return WeatherService.getAllFlowByYear(year);
-        return WeatherService.getCardFlowByYear(year);
-        //return WeatherService.getZheFlowByYear(year);
-        //return WeatherService.getZhuFlowByYear(year);
+        //return weatherService.getAllFlowByYear(year);
+        return weatherService.getCardFlowByYear(year);
+        //return weatherService.getZheFlowByYear(year);
+        //return weatherService.getZhuFlowByYear(year);
     }
 
 }
