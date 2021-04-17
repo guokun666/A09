@@ -19,9 +19,11 @@ public class WorkdayEntity {//b
     @ApiModelProperty("工作日日均进站流量")
     private BigInteger workday;//workday_average
     @ApiModelProperty("周末日均进站客流")
-    private Integer weekend;//weekend_average
+    private BigInteger weekend;//weekend_average
     @ApiModelProperty("整年日均进站客流")
-    private Integer all;//all_average
+    private BigInteger all;//all_average
     @ApiModelProperty("月份")
     private Integer month;//b_month
+    @ApiModelProperty("日期")
+    private Integer date;//b_month
 }

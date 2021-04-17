@@ -1,8 +1,7 @@
 package com.boot.demo.service;
 
-import com.boot.demo.entity.WorkdayEntity;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 /**
  * @author guokun
@@ -10,10 +9,10 @@ import java.util.List;
 @Service
 public interface WorkdayService {
 
-    public WorkdayEntity getYear(Integer b_year);
-public List<WorkdayEntity> getMonth(Integer b_year);
-public List<WorkdayEntity> getLine(Integer b_year);
-public List<WorkdayEntity> getSingleyear(Integer b_year,String line);
-    public List<WorkdayEntity> getSinglemonth(Integer b_year,String line);
+    public JSONObject getYear(Integer b_year);
+public JSONObject getMonth(Integer b_year);
+public JSONObject getLine(Integer b_year);
+public JSONObject getSingleyear(Integer b_year, String line);
+    public JSONObject getSinglemonth(Integer b_year, String line);
 }
 

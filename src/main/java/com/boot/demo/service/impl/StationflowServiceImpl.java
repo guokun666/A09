@@ -1,5 +1,6 @@
 package com.boot.demo.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.dao.StationflowDao;
 import com.boot.demo.entity.StationflowEntity;
 import com.boot.demo.service.StationflowService;
@@ -19,8 +20,13 @@ public class StationflowServiceImpl implements StationflowService {
     private StationflowDao stationflowDao;
 
     @Override
-    public StationflowEntity getStationflow(Integer c_year,String line,String station_name) {//数据库的字段名
-        return stationflowDao.getStationflow(c_year,line,station_name);
+    public JSONObject getStationflow(Integer c_year, String line, String station_name) {//数据库的字段名
+        StationflowEntity entity=stationflowDao.getStationflow(c_year,line,station_name);
+        if(entity==null)return null;
+
+
+
+        return null;
     }
 
     @Override

@@ -19,11 +19,13 @@ public class PeakEntity {//e
     @ApiModelProperty("客流")
     private Integer flow;//flow
     @ApiModelProperty("时间段")
-    private String time;//time_slot
+    private Integer time;//time_slot
     @ApiModelProperty("早占比")
     private String moringpercentage;//percentage
     @ApiModelProperty("晚占比")
     private String eveningpercentage;//percentage
     @ApiModelProperty("月份")
     private Integer month;//e_month
+    @ApiModelProperty("日期")
+    private Integer date;//e_month
 }

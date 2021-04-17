@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.boot.demo.components.common.constant.CommonConstants.LINE_NAME;
-import static com.boot.demo.components.common.constant.CommonConstants.STRING_TO_INT;
+import static com.boot.demo.components.common.constant.CommonConstants.*;
 
 
 /**
@@ -61,4 +60,9 @@ public class StationController {
         return BaseResult.ok(json);
     }
 
+    @GetMapping("/sequence")
+    @ApiOperation("获取某线路站点拓扑序列 参数 lineID")
+    public Object getStationSequenceByLine(@RequestParam("lineID")Integer lineID){
+        return BaseResult.ok(STATION_OF_LINES[INDEX_OF_STRINGS(LINE_ID,lineID)]);
+    }
 }

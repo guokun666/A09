@@ -15,16 +15,16 @@
     </resultMap>
     <select id="getSectionList" resultMap="SectionMap">
         SELECT upward_flow,downward_flow,station_name
-        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station1 where line_name= #{singleline} )
+        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station where line_name= #{singleline} )
     </select>
     <select id="getTopUp" resultMap="SectionMap">
         SELECT station_name
-        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station1 where line_name= #{singleline} )
+        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station where line_name= #{singleline} )
         order by upward_flow desc limit 1
     </select>
     <select id="getTopDown" resultMap="SectionMap">
         SELECT station_name
-        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station1 where line_name= #{singleline} )
+        FROM g_1 WHERE time_slot = #{time} and station_name in (select station_name from station where line_name= #{singleline} )
         order by downward_flow desc limit 1
     </select>
 

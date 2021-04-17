@@ -117,6 +117,9 @@ public class WeatherServiceImpl implements WeatherService {
         }
 
         series.add((JSONObject)s.clone());
+        s.replace("name","阴天");
+        s.replace("data",cloudyData);
+        series.add((JSONObject)s.clone());
         s.replace("name","雨天");
         s.replace("data",rainyData);
         series.add((JSONObject)s.clone());

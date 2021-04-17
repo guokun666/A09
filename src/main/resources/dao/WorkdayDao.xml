@@ -6,7 +6,7 @@
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.boot.demo.entity.WorkdayEntity" id="WorkdayMap">
 <result property="year" column="b_year"/>
-     <result property="date" column="b_date"/>
+        <result property="date" column="b_date"/>
         <result property="month" column="b_month"/>
         <result property="singleline" column="line"/>
         <result property="workday" column="workday_average"/>
@@ -16,7 +16,7 @@
 
 
     <select id="getYear" resultMap="WorkdayMap">
-        SELECT workday_average,weekend_average,all_average FROM b_3 WHERE b_year = #{year}
+        SELECT workday_average,weekend_average,all_average FROM b_3 WHERE b_year = #{year} LIMIT 1
     </select>
     <select id="getMonth" resultMap="WorkdayMap">
         SELECT workday_average,weekend_average,b_month FROM b_4 WHERE b_year = #{year}
@@ -25,7 +25,10 @@
         SELECT workday_average,weekend_average,line FROM b_1 WHERE b_year = #{year}
     </select>
     <select id="getSingleyear" resultMap="WorkdayMap">
-        SELECT workday_average,weekend_average,all_average FROM b_1 WHERE b_year = #{year} and line= #{singleline}
+        SELECT workday_average,weekend_average,all_average
+        FROM b_1
+        WHERE b_year = #{year} and line= #{singleline}
+        LIMIT 1
     </select>
     <select id="getSinglemonth" resultMap="WorkdayMap">
         SELECT workday_average,weekend_average,b_month FROM b_2 WHERE b_year = #{year} and line= #{singleline}

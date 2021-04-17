@@ -1,5 +1,6 @@
 package com.boot.demo.controller;
 
+import com.boot.demo.components.common.base.BaseResult;
 import com.boot.demo.service.PeakService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/historydata/peak")
-@Api(tags = "A09")
+@RequestMapping("/historyData/peak")
+@Api(tags = "历史数据")
 public class PeakController {
 
     @Autowired
@@ -21,23 +22,23 @@ public class PeakController {
 
 
 
-    @GetMapping("/year")
-    @ApiOperation(value = "根据年份查询城市早高峰客流", notes = "")
+    @GetMapping("/city")
+    @ApiOperation(value = "城市-高峰客流", notes = "根据年份查询城市高峰客流")
     public Object getCity(@RequestParam("year") Integer year) {
-        return peakService.getCity(year);
+        return BaseResult.ok(peakService.getCity(year));
     }
 
 
-    @GetMapping("/singleline/year")
-    @ApiOperation(value = "根据年份查询单线路早高峰客流", notes = "")
-    public Object getLine(@RequestParam("year") Integer year,@RequestParam("singleline")String singleline) {
-        return peakService.getLine(year,singleline);
+    @GetMapping("/singleLine/year")
+    @ApiOperation(value = "单线路-高峰客流[年]", notes = "根据年份查询单线路高峰客流")
+    public Object getLine(@RequestParam("year") Integer year,@RequestParam("lineID")String lineID) {
+        return BaseResult.ok(peakService.getLine(year,lineID+"号线"));
     }
-    @GetMapping("/singleline/month")
-    @ApiOperation(value = "根据年份和月份查询单线路早高峰客流", notes = "")
-    public Object getLineMonth(@RequestParam("year") Integer year,@RequestParam("singleline")String singleline,
+    @GetMapping("/singleLine/month")
+    @ApiOperation(value = "单线路-高峰客流[月]", notes = "根据年份和月份查询单线路高峰客流")
+    public Object getLineMonth(@RequestParam("year") Integer year,@RequestParam("lineID")String lineID,
                                @RequestParam("month")Integer month) {
-        return peakService.getLineMonth(year,singleline,month);
+        return BaseResult.ok(peakService.getLineMonth(year,lineID+"号线",month));
     }
 
 

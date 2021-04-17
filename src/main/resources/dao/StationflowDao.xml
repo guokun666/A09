@@ -20,6 +20,7 @@
     <select id="getStationflow" resultMap="StationflowMap">
         SELECT sum(flow_in) as flow_in,sum(flow_out) as flow_out
         FROM c_1 WHERE c_year = #{year} and line= #{singleline} and station_name= #{station}
+        <if test=""></if>
     </select>
     <select id="getStationyear" resultMap="StationflowMap">
         SELECT  flow_in, flow_out,c_month

@@ -12,7 +12,7 @@ public interface WorkdayDao {
     WorkdayEntity getYear(@Param("year") Integer year);
    List<WorkdayEntity> getMonth(@Param("year")Integer year);
    List<WorkdayEntity> getLine(@Param("year")Integer year);
-   List<WorkdayEntity> getSingleyear(@Param("year")Integer year,@Param("singleline")String singleline);
+   WorkdayEntity getSingleyear(@Param("year")Integer year,@Param("singleline")String singleline);
     List<WorkdayEntity> getSinglemonth(@Param("year")Integer year,@Param("singleline")String singleline);
 
 }

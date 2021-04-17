@@ -1,9 +1,16 @@
 package com.boot.demo.components.common.constant;
 
+
+import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
+
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -14,10 +21,106 @@ public class CommonConstants {
 
 
         public final static String[] LINE_NAME = {"1号线", "2号线", "3号线", "4号线", "5号线", "10号线", "11号线", "12号线"};
+        public final static Integer[] LINE_ID = {1, 2, 3, 4, 5, 10, 11, 12};
         public final static String[] MONTH = {"1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"};
-        public final static String[] HOLIDAT ={"元旦","春节","清明","五一","端午"};
+        //        public final static String[] HOLIDAY ={"元旦","春节","清明","五一","端午"};
         public final static Integer LINE_NUMBERS = LINE_NAME.length;//线路数量
-        public static Integer INDEX_OF_STRINGS(String[] list, String str){
+
+
+    //图标展示要用到的json-----------------------------
+
+
+    public static <N,V,T,M> List<JSONObject> TWO_JSON_LIST(T key1, List<N> name, M key2, List<V> value){
+        List<JSONObject>cards=new ArrayList<>();
+        for(int i=0;i<name.size();i++){
+            JSONObject js=new JSONObject(true);
+            js.put("name",name.get(i));
+            js.put("value",value.get(i));
+            cards.add(js);
+        }
+        return cards;
+    }
+
+    public static <N,V> JSONObject CARD_CHART_JSON(N[] name,V[] value){
+        JSONObject cardChart=new JSONObject(true);
+        List<JSONObject>cards=new ArrayList<>();
+        for(int i=0;i<name.length;i++){
+            JSONObject js=new JSONObject(true);
+            js.put("name",name[i]);
+            js.put("value",value[i]);
+            cards.add(js);
+        }
+        cardChart.put("cardChart",cards);
+        return cardChart;
+    }
+
+    public static <T,P> JSONObject CHART_JSON(P[] axisName,List<T> series){
+        JSONObject json=new JSONObject(true);
+        json.put("line",axisName);
+        json.put("series",series);
+        return json;
+    }
+
+    public static <T,P,M> JSONObject SERIES_JSON(P name,M type,List<T>data){
+        JSONObject json=new JSONObject(true);
+        json.put("name",name);
+        json.put("type",type);
+        json.put("data",data);
+//        System.out.println(data);
+        return json;
+    }
+
+    public static <T,P,M> List<Object> SERIES_LIST(P[] names,M type,List<List<T>>data){
+        List<Object>series=new ArrayList<>();
+        for(int i=0;i<names.length;i++){
+            series.add(SERIES_JSON(names[i],type,data.get(i)));
+        }
+        return series;
+    }
+
+    public static <T> List<List<T>> CREATE_LISTS(int listsLen, int listLen,T t){
+        List<List<T>>lists=new ArrayList<>();
+        for(int i=0;i<listsLen;i++){
+            List<T>list=new ArrayList<>();
+            for(int j=0;j<listLen;j++)list.add(t);
+            lists.add(list);
+        }
+        return lists;
+    }
+
+
+    //----------------------------------------------
+        public static int DAYS_OF_MONTH_IN_YEAR(int year,int month){
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year,month-1,1);
+            return calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        }
+
+        public  static  Integer[] INIT_FROM_1_TO_END(Integer[] ts){
+            for(int i=1;i<=ts.length;i++)ts[i-1]=i;
+            return ts;
+        }
+
+        //生成[A,B]的数组（左右都是包含）
+    public  static  Integer[] INIT_FROM_A_TO_B(int A,int B){
+        Integer[] ans=new Integer[B-A+1];
+        for(int i=A;i<=B;i++)ans[i-A]=i;
+        return ans;
+    }
+
+
+    public static <T> T[] INIT_BY(T[] ts,T t){
+            for (int i=0;i<ts.length;i++)ts[i]=t;
+            return ts;
+        }
+
+        public static <T> String[] ADD_TO_STRING(T[] t,String addString){
+            String[] strings=new String[t.length];
+            for(int i=0;i<t.length;i++)strings[i]=t[i]+addString;
+            return strings;
+        }
+
+        public static <T> Integer INDEX_OF_STRINGS(T[] list, T str){
             if(str==null)return -1;
             for(int i=0;i<list.length;i++)
                 if(str.equals(list[i]))

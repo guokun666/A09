@@ -29,6 +29,6 @@
         SELECT line ,sum(flow) as flow FROM a_1 WHERE a_year = #{year} and a_month = #{month} group by line
     </select>
     <select id="getCitydate" resultMap="LinemonthMap">
-        SELECT line,flow,a_date FROM a_2 WHERE a_year = #{year} and a_month = #{month} group by line
+        SELECT line,flow,a_date FROM a_2 WHERE a_year = #{year} and a_month = #{month}
     </select>
 </mapper>
