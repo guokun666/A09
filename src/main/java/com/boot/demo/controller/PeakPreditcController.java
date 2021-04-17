@@ -26,7 +26,7 @@ public class PeakPreditcController {
     public Object getCityTime(@RequestParam("time") String time) {
         return peakpreditcService.getCityTime(time);
     }
-    @GetMapping("/evening")
+    @GetMapping("/topline")
     @ApiOperation(value = "预测城市早晚高峰客流的最值", notes = "根据选的单选框展示最大值得线路和客流以及聚集度\n郭某人注释")
     public Object getPeak(@RequestParam("time") String time) {
         return peakpreditcService.getPeak(time);
