@@ -61,6 +61,25 @@ public class CommonConstants {
         return json;
     }
 
+    public static <T,M>JSONObject TWO_JSON(String key1,T value1,String key2,M value2){
+        JSONObject json=new JSONObject(true);
+        json.put(key1,value1);
+        json.put(key2,value2);
+        return json;
+    }
+
+    public static <M,T>JSONObject ONE_JSON(String key,M value){
+        JSONObject jsonObject=new JSONObject(true);
+        jsonObject.put(key,value);
+        return jsonObject;
+    }
+
+    public static JSONObject LIST_JSON(String[] keys,List<Object>values){
+        JSONObject js=new JSONObject(true);
+        for(int i=0;i<keys.length;i++)js.put(keys[i],values.get(i));
+        return js;
+    }
+
     public static <T,P,M> JSONObject SERIES_JSON(P name,M type,List<T>data){
         JSONObject json=new JSONObject(true);
         json.put("name",name);
@@ -69,6 +88,20 @@ public class CommonConstants {
 //        System.out.println(data);
         return json;
     }
+
+    public static <T,P,M> JSONObject SERIES_JSON(P name,String type,List<T>data,String stack,JSONObject emphasis){
+        JSONObject json=SERIES_JSON(name,type,data);
+        if(stack!=null)json.put("stack",stack);
+        if(emphasis!=null)json.put("emphasis",emphasis);
+        return json;
+    }
+
+    public static JSONObject EMPHASIS_JSON(int shadowBlur,String shadowColor){
+        JSONObject json=new JSONObject(true);
+        json.put("itemStyle",TWO_JSON("shadowBlur",shadowBlur,"shadowColor",shadowColor));
+        return json;
+    }
+
 
     public static <T,P,M> List<Object> SERIES_LIST(P[] names,M type,List<List<T>>data){
         List<Object>series=new ArrayList<>();

@@ -39,7 +39,7 @@ public class SwaggerConfig {
     //描述
     private final String description = "A09服创管理系统";
     //termsOfServiceUrl
-    private final String termsOfServiceUrl = "http://192.168.36.172:8888/";
+    private final String termsOfServiceUrl = "http://192.168.36.172:8080/";
     private final String version = "1.0";
     //消息体对象
     private final  String resp = "ResponseMsg";

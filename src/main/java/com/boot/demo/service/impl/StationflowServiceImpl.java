@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.boot.demo.components.common.constant.CommonConstants.TWO_JSON;
+
 /**
  * @author guokun
         */
@@ -23,10 +25,7 @@ public class StationflowServiceImpl implements StationflowService {
     public JSONObject getStationflow(Integer c_year, String line, String station_name) {//数据库的字段名
         StationflowEntity entity=stationflowDao.getStationflow(c_year,line,station_name);
         if(entity==null)return null;
-
-
-
-        return null;
+        return TWO_JSON("flowIn",entity.getFlow_in(),"flowOut",entity.getFlow_out());
     }
 
     @Override

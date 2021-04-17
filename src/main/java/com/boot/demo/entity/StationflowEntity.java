@@ -26,6 +26,6 @@ public class StationflowEntity {//c
     private Integer month;//c_month
     @ApiModelProperty("日期")
     private Integer date;//c_date
-    @ApiModelProperty("时间段")
-    private String time;//c_time
+    @ApiModelProperty("时间")
+    private Integer time;//c_time
 }

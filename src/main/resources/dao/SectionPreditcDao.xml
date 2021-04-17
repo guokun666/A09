@@ -4,7 +4,7 @@
 <mapper namespace="com.boot.demo.dao.SectionPreditcDao">
 
 	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
-    <resultMap type="com.boot.demo.entity.SectionPreditcEntity" id="SectionPrecitdMap">
+    <resultMap type="com.boot.demo.entity.SectionPreditcEntity" id="SectionPreditcMap">
 
         <result property="line" column="line"/>
         <result property="flow_up" column="flow_up"/>
