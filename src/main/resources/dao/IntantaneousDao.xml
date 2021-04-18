@@ -16,21 +16,16 @@
 
 
     <select id="getDayFlowByDayAndStation" resultMap="InstantaneousMap">
-        SELECT flow_in, flow_out FROM i_dayin, i_dayout
+        SELECT CONCAT(HOUR(time_slot),':',MINUTE(time_slot)) AS time_slot,flow_in, flow_out FROM i_day
         WHERE
-        i_dayin.time_slot = #{time} AND
-        i_dayout.time_slot = #{time} AND
-        i_dayin.station_name=#{station} AND
-        i_dayout.station_name=#{station}
+        DATE(i_day.time_slot) = DATE(#{time}) AND
+        i_day.station_name=#{station}
     </select>
 
     <select id="getYearFlowByYearAndStation" resultMap="InstantaneousMap">
-        SELECT flow_in, flow_out FROM i_yearin, i_yearout
+        SELECT CONCAT(HOUR(time_slot),':',MINUTE(time_slot)) AS time_slot,flow_in, flow_out FROM i_year
         WHERE
-        i_yearin.time_slot = #{year} AND
-        i_yearout.time_slot = #{year} AND
-        i_yearin.station_name=#{station} AND
-        i_yearout.station_name=#{station}
+        i_year.station_name=#{station}
     </select>
 
 

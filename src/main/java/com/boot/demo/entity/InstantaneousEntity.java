@@ -2,8 +2,6 @@ package com.boot.demo.entity;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
-import java.math.BigInteger;
-
 //CWZ
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
@@ -21,8 +19,8 @@ public class InstantaneousEntity {
     /*
     客流值
      */
-    private BigInteger flow_in;
+    private Integer flow_in;
 
-    private BigInteger flow_out;
+    private Integer flow_out;
 
 }

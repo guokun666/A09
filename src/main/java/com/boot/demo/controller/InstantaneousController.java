@@ -1,5 +1,7 @@
 package com.boot.demo.controller;
 
+import com.boot.demo.components.common.base.BaseResult;
+import com.boot.demo.entity.InstantaneousEntity;
 import com.boot.demo.service.InstantaneousService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 /**
  * @author CWZ
@@ -17,26 +21,25 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-@RequestMapping("historydata/instantaneous")
-@Api(tags = "A09")
+@RequestMapping("historyData/instantaneous")
+@Api(tags = "历史数据")
 public class InstantaneousController {
 
     @Autowired
     private InstantaneousService instantaneousService;
 
-    @ApiOperation(value = "历史查询--单线路--瞬时分析",
-            notes = "2020-4-14\n" +
-                    "只有单线路有瞬时分析，一共两个接口:\n" +
+    @ApiOperation(value = "单线路-瞬时分析",
+            notes = "2020-4-17\n" +
+                    "只有单线路有瞬时分析，一共三个数据:\n" +
                     "全天的各瞬时段客流\n" +
-                    "全年的各瞬时段客流\n"
+                    "全年的各瞬时段客流\n" +
+                    "客流峰值瞬时段（前3个高和低时段）"
     )
-    @GetMapping("/singleline")
-    public Object getByYear(@RequestParam("year") String year, @RequestParam("line") String line){
-        /*
-        目前还只返回了单线路上下行
-         */
-        //return InstantaneousService.getInstantaneousFlowByYear(year);
-        return instantaneousService.getDayFlowByDayAndStation(year, line);
+    @GetMapping("/singleLine")
+    public Object getByYear(@RequestParam("time") String time, @RequestParam("station") String station){
+        //return InstantaneousService.getInstantaneousFlowByYear(station);
+        return BaseResult.ok(instantaneousService.getDayFlowByDayAndStation(time,station));
+
     }
 
 }

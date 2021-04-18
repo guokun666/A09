@@ -83,7 +83,7 @@ public class CommonConstants {
     public static <T,P,M> JSONObject SERIES_JSON(P name,M type,List<T>data){
         JSONObject json=new JSONObject(true);
         json.put("name",name);
-        json.put("type",type);
+        if(type!=null)json.put("type",type);
         json.put("data",data);
 //        System.out.println(data);
         return json;
