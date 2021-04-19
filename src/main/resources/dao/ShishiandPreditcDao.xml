@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.ShishiandPreditcDao">
+
+	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
+    <resultMap type="com.boot.demo.entity.ShishiandPreditcEntity" id="ShishiandPreditcMap">
+
+        <result property="line" column="line"/>
+        <result property="flow_in" column="flow_in"/>
+        <result property="time" column="time_stemp"/>
+        <result property="flow_out" column="flow_out"/>
+    </resultMap>
+
+
+    <select id="getCityFlow" resultMap="ShishiandPreditcMap">
+        SELECT sum(flow_in) as flow_in,sum(flow_out)
+        FROM s_1 WHERE time_stemp= #{time} where station_name in #{station}
+    </select>
+
+
+</mapper>
