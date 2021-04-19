@@ -138,10 +138,10 @@ public class StationflowController {
         }
 
         return BaseResult.ok(
-                TWO_JSON_LIST("flowInTop3",
-                        TWO_JSON_LIST("name",name.subList(0,3),"flow",flow.subList(0,3)),
+                TWO_JSON("flowInTop3",
+                        TWO_JSON("name",name.subList(0,3),"flow",flow.subList(0,3)),
                         "flowOutTop3",
-                        TWO_JSON_LIST("name",name.subList(3,6),"flow",flow.subList(3,6))
+                        TWO_JSON("name",name.subList(3,6),"flow",flow.subList(3,6))
                 )
         );
     }

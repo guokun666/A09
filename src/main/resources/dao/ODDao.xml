@@ -5,9 +5,8 @@
 
 	<!-- 前面是实体的字段名字，这个映射还要仔细问问 -->
     <resultMap type="com.boot.demo.entity.ODEntity" id="ODMap">
-<result property="day" column="f_date"/>
+        <result property="day" column="f_date"/>
         <result property="flow" column="flow"/>
-
         <result property="start_station" column="start_station"/>
         <result property="end_station" column="end_station"/>
         <result property="line" column="line"/>
@@ -15,8 +14,8 @@
 
 
     <select id="getOD" resultMap="ODMap">
-        SELECT start_station,end_station,line,flow
-        FROM f_1 WHERE f_date = #{day} and line= #{line}
+        SELECT start_station,end_station,flow
+        FROM f_1 WHERE DATE(f_date) = DATE(#{day}) and line= #{line}
     </select>
 
 </mapper>

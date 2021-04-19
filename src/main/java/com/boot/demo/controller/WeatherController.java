@@ -50,7 +50,7 @@ public class WeatherController {
                     "单线路全年日均客流\n" +
                     "单线路各天气日均客流\n" +
                     "单线路各月份日均客流量走势(字段名格式必须一致)\n")
-    @GetMapping("/singleLine")
+    @GetMapping("/single_line")
     public Object getByYear(@RequestParam("year") Integer year,@RequestParam("lineID") Integer lineID){
         JSONObject json = new JSONObject(true);
 

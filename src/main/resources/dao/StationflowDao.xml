@@ -35,7 +35,7 @@
         month(year_mon_day_hour)= #{month} and day(year_mon_day_hour)= #{date}
     </select>
     <select id="getStationOut" resultMap="StationflowMap">
-        SELECT  flow_out,hour(year_mon_day_hour) as time,sum(flow_out)
+        SELECT  flow_out,hour(year_mon_day_hour) as time
         FROM c_4 WHERE year(year_mon_day_hour) = #{year} and line= #{singleline} and station_name= #{station} and
         month(year_mon_day_hour)= #{month} and day(year_mon_day_hour)= #{date}
     </select>

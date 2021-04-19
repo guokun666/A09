@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.FlowEventDao">
+
+    <select id="selectEventsByDay" resultType="com.boot.demo.entity.FlowEventEntity">
+        SELECT * FROM flow_event WHERE DATE(event_time)=DATE(#{date}) ORDER BY is_done,event_time
+    </select>
+
+
+
+
+    <update id="setDoneOrNotDoneByID" >
+        UPDATE flow_event SET is_done=(is_done+1)%2 WHERE event_no=#{eventNo}
+    </update>
+    
+    <insert id="insertNewEvent" parameterType="com.boot.demo.entity.FlowEventEntity">
+        INSERT INTO flow_event(station_name,event_time,event_type,event_description)
+        VALUES (#{stationName},#{eventTime},#{eventType},#{eventDescription})
+    </insert>
+
+</mapper>

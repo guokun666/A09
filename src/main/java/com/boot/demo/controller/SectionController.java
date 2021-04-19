@@ -2,8 +2,8 @@ package com.boot.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.components.common.base.BaseResult;
+import com.boot.demo.dao.SectionDao;
 import com.boot.demo.entity.SectionEntity;
-import com.boot.demo.service.SectionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -25,25 +25,25 @@ import static com.boot.demo.components.common.constant.CommonConstants.*;
 public class SectionController {
 
     @Autowired
-    private SectionService sectionService;
+    private SectionDao sectionDao;
 
 
     @GetMapping("/singleLine")
     @ApiOperation(value = "单线路-展示线路断面", notes = "注意参数哦！\n" +
             "分别为：早高峰，晚高峰，全日(或者数字0,1,2)")
     public Object getSection(@RequestParam("time") String time,@RequestParam("lineID") String lineID) {
-        String[] TIME={"早高峰","晚高峰","全日"};
+        String[] TIME={"早高峰","晚高峰","全天"};
         if(time.equals("0")||time.equals("1")||time.equals("2"))time=TIME[Integer.parseInt(time)];
 
         String line = lineID+"号线";
 
-        List<SectionEntity>entities = sectionService.getSection(time,line);
+        List<SectionEntity>entities = sectionDao.getSectionList(time,line);
 
         Integer lineIndex=INDEX_OF_STRINGS(LINE_NAME,line);
 
         List<List<Integer>>data=CREATE_LISTS(2,STATION_OF_LINES[lineIndex].length,0);
 
-        for(SectionEntity e:entities.subList(2,entities.size())){
+        for(SectionEntity e:entities){
             Integer index=INDEX_OF_STRINGS(STATION_OF_LINES[lineIndex],e.getStation());
             data.get(0).set(index,e.getFlow_up());
             data.get(1).set(index,e.getFlow_down());
@@ -61,9 +61,13 @@ public class SectionController {
         String[] peakTimeString={"07:00-9:00","17:00-19:00","07:00-9:00,17:00-19:00"};
 
         //2
-        JSONObject cardChart=TWO_JSON("peakTime",peakTimeString[INDEX_OF_STRINGS(TIME,time)],
-                "biggestSection",TWO_JSON("up",entities.get(0).getStation(),
-                        "down",entities.get(1).getStation()));
+        SectionEntity up = sectionDao.getTopUp(time, line);
+        SectionEntity down = sectionDao.getTopDown(time, line);
+        JSONObject cardChart=new JSONObject(true);
+        if(up!=null&&down!=null)
+            cardChart=TWO_JSON("peakTime",peakTimeString[INDEX_OF_STRINGS(TIME,time)],
+                "biggestSection",TWO_JSON("up",up.getStation(),
+                        "down",down.getStation()));
 
         return BaseResult.ok(TWO_JSON("barChart",barChart,"cardChart",cardChart));
 

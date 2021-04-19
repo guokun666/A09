@@ -27,7 +27,34 @@ public class CommonConstants {
         public final static Integer LINE_NUMBERS = LINE_NAME.length;//线路数量
 
 
+    public static void PAUSE(int n){
+        try { Thread.sleep ( n ) ;
+        } catch (InterruptedException ie){}
+    }
+
     //图标展示要用到的json-----------------------------
+    public static <T> JSONObject TABLE_JSON(String[] headA,String[] headB,List<List<T>>table){
+        JSONObject json=new JSONObject(true);
+
+        List<String>header = new ArrayList<String>(Arrays.asList(headA));
+        header.add(0,"name");
+        json.put("header",header);
+
+        List<JSONObject>data=new ArrayList<>();
+        for(int i=0;i<headA.length;i++){
+            JSONObject lineData=new JSONObject(true);
+            lineData.put("name",headA[i]);
+
+            for(int j=0;j<headB.length;j++)
+                lineData.put(headB[j],table.get(i).get(j));
+
+            data.add(lineData);
+        }
+
+        json.put("data",data);
+
+        return json;
+    }
 
 
     public static <N,V,T,M> List<JSONObject> TWO_JSON_LIST(T key1, List<N> name, M key2, List<V> value){
@@ -103,10 +130,10 @@ public class CommonConstants {
     }
 
 
-    public static <T,P,M> List<Object> SERIES_LIST(P[] names,M type,List<List<T>>data){
+    public static <T,P,M> List<Object> SERIES_LIST(P[] groups,M type,List<List<T>>data){
         List<Object>series=new ArrayList<>();
-        for(int i=0;i<names.length;i++){
-            series.add(SERIES_JSON(names[i],type,data.get(i)));
+        for(int i=0;i<groups.length;i++){
+            series.add(SERIES_JSON(groups[i],type,data.get(i)));
         }
         return series;
     }
@@ -153,10 +180,16 @@ public class CommonConstants {
             return strings;
         }
 
-        public static <T> Integer INDEX_OF_STRINGS(T[] list, T str){
-            if(str==null)return -1;
-            for(int i=0;i<list.length;i++)
-                if(str.equals(list[i]))
+    public static <T> String[] ADD_TO_STRING(String leftString,T[] t,String rightString){
+        String[] strings=new String[t.length];
+        for(int i=0;i<t.length;i++)strings[i]=leftString+t[i]+rightString;
+        return strings;
+    }
+
+        public static <T> Integer INDEX_OF_STRINGS(T[] array, T a){
+            if(a==null)return -1;
+            for(int i=0;i<array.length;i++)
+                if(a.equals(array[i]))
                     return i;//返回对应字符串所对应的索引号
             return -1;//不存在返回-1
         }

@@ -12,7 +12,7 @@ public interface SectionDao {
 
 
     List<SectionEntity> getSectionList(@Param("time")String time,@Param("singleline")String singleline);
-    List<SectionEntity> getTopUp(@Param("time")String time,@Param("singleline")String singleline);
-    List<SectionEntity> getTopDown(@Param("time")String time,@Param("singleline")String singleline);
+    SectionEntity getTopUp(@Param("time")String time,@Param("singleline")String singleline);
+    SectionEntity getTopDown(@Param("time")String time,@Param("singleline")String singleline);
 }
 

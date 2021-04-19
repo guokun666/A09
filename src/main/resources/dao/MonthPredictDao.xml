@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.MonthPredictDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.MonthPredictEntity" id="MonthPredictMap">
+        <result property="month" column="y_month"/>
+        <result property="station" column="station_name"/>
+        <result property="date" column="y_day"/>
+        <result property="flow_in" column="flow"/>
+        <result property="flow_in" column="flow_in"/>
+        <result property="flow_out" column="flow_out"/>
+        <result property="singleline" column="line"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+
+    <select id="getCityMonth" resultMap="MonthPredictMap">
+        SELECT * FROM y_1
+    </select>
+    <select id="getStationMonth" resultMap="MonthPredictMap">
+        SELECT flow_in,station_name FROM y_4_2 where y_month= #{month}
+    </select>
+    <select id="getCityTopMax" resultMap="MonthPredictMap">
+        SELECT y_month,line FROM y_1  order by flow_in desc limit 1
+    </select>
+    <select id="getCityTopMin" resultMap="MonthPredictMap">
+        SELECT y_month,line FROM y_1  order by flow_in asc limit 1
+    </select>
+    <select id="getStationSum" resultMap="MonthPredictMap">
+        SELECT sum(flow_in) as flow_in,sum(flow_out)as flow_out FROM y_4_3 where day(y_day)= #{date} and station_name in
+        (select station_name from station where line_name= #{singleline})
+    </select>
+    <select id="getStationTime" resultMap="MonthPredictMap">
+        SELECT sum(flow_in) as flow_in,sum(flow_out)as flow_out,time(y_day) as time FROM y_4_3 where day(y_day)= #{date}  and station_name in
+        (select station_name from station where line_name= #{singleline})
+    </select>
+    <select id="getStationTopIn" resultMap="MonthPredictMap">
+        SELECT sum(flow_in) as flow_in,station_name FROM y_4_3 where day(y_day)= #{date}  order by flow_in desc limit 3
+    </select>
+    <select id="getStationTopOut" resultMap="MonthPredictMap">
+        SELECT sum(flow_out) as flow_out,station_name FROM y_4_3 where day(y_day)= #{date}  order by flow_out desc limit 3
+    </select>
+
+
+</mapper>

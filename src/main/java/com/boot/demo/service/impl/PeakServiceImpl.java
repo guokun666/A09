@@ -46,7 +46,7 @@ public class PeakServiceImpl implements PeakService {
 
         JSONObject lineChart = CHART_JSON(TIME, SERIES_LIST(LINE_NAME, "line", data));
 
-        return JSON(peakDao.getCityPercentage(e_year).get(0),lineChart);
+        return JSON(peakDao.getCityPercentage(e_year),lineChart);
     }
     @Override
     public JSONObject getLine(Integer e_year, String line) {//数据库的字段名
@@ -60,7 +60,7 @@ public class PeakServiceImpl implements PeakService {
 
         JSONObject lineChart = CHART_JSON(TIME, data);
 
-        return JSON(peakDao.getLinePercentage(e_year, line).get(0),lineChart);
+        return JSON(peakDao.getLinePercentage(e_year, line),lineChart);
     }
     @Override
     public JSONObject getLineMonth(Integer e_year, String line, Integer e_month) {//数据库的字段名
@@ -74,7 +74,7 @@ public class PeakServiceImpl implements PeakService {
 
         JSONObject lineChart = CHART_JSON(TIME, data);
 
-        return JSON(peakDao.getLineMonthPercentage(e_year,line,e_month).get(0),lineChart);
+        return JSON(peakDao.getLineMonthPercentage(e_year,line,e_month),lineChart);
     }
 
 }

@@ -30,10 +30,10 @@ public class InstantaneousController {
 
     @ApiOperation(value = "单线路-瞬时分析",
             notes = "2020-4-17\n" +
-                    "只有单线路有瞬时分析，一共三个数据:\n" +
+                    "只有单线路有瞬时分析，一共三个数据[只实现前两个]:\n" +
                     "全天的各瞬时段客流\n" +
                     "全年的各瞬时段客流\n" +
-                    "客流峰值瞬时段（前3个高和低时段）"
+                    "客流峰值瞬时段（前3个高和低时段）[没有做]"
     )
     @GetMapping("/singleLine")
     public Object getByYear(@RequestParam("time") String time, @RequestParam("station") String station){

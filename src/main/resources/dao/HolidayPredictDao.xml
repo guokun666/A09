@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.HolidayPredictDao">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.boot.demo.entity.HolidayPredictEntity" id="HolidayPredictMap">
+        <result property="holiday" column="date_attribute"/>
+        <result property="station" column="station_name"/>
+        <result property="flow" column="flow"/>
+    </resultMap>
+
+    <select id="getCityHoliday" resultMap="HolidayPredictMap">
+        SELECT holiday as date_attribute, day_average as flow FROM j_1 where j_year=2020
+    </select>
+<!--这里是调用y2表的sql，暂时未实现，用j_1代替-->
+<!--    <select id="getCityHoliday" resultMap="HolidayPredictMap">-->
+<!--        SELECT sum(flow) as flow,date_attribute FROM y_2 group by date_attribute-->
+<!--    </select>-->
+    <select id="getStationHoliday" resultMap="HolidayPredictMap">
+        SELECT * FROM y_2
+    </select>
+
+
+</mapper>

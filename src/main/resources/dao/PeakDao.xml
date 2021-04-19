@@ -45,7 +45,6 @@
         SELECT concat(((select sum(flow) from e_2 where time_slot between 7 and 9 and e_year= #{year} and line=#{singleline} and e_month= #{month})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline} and e_month= #{month}))*100 ,'%') as moringpercentage,
         concat(((select sum(flow) from e_2 where time_slot between 17 and 19 and e_year= #{year} and line=#{singleline})/(select sum(flow) from e_2 where e_year=#{year} and line=#{singleline}))*100 ,'%') as eveningpercentage
         FROM e_1  where e_year= #{year}  and e_month= #{month} group by e_year
-
     </select>
 
 </mapper>

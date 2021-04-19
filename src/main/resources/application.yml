@@ -2,21 +2,21 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
-    url: jdbc:mysql://192.168.36.43:3306/bisai?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-    username: qidian
-    password: qd2019B03
+#
+#    url: jdbc:mysql://192.168.36.43:3306/bisai?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+#    username: qidian
+#    password: qd2019B03
 
 ##    郭丽婧
 #    url: jdbc:mysql://localhost:3306/sql?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
 #    username: root
 #    password: 123456
 
-##
-##    郭坤
-#    url: jdbc:mysql://localhost:3306/bisai?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
-#    username: root
-#    password: 123456
+
+#    郭坤
+    url: jdbc:mysql://localhost:3306/bisai?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: 123456
 
 mybatis:
   type-aliases-package: com.boot.demo.entity

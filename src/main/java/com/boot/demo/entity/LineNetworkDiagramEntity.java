@@ -78,6 +78,7 @@ public class LineNetworkDiagramEntity {
         JSONObject labelJson=new JSONObject(true);
         labelJson.put("color","#000");//站点标签字体设置黑色
         labelJson.put("position",labelPosition);
+//        labelJson.put("rotate",rotate);
         json.put("label",labelJson);
 
         JSONObject itemStyleJson=new JSONObject(true);
