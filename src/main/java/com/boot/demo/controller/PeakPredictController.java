@@ -33,6 +33,8 @@ public class PeakPredictController {
     public Object getCityTime(@RequestParam("time") Integer time) {
         List<PeakPredictEntity>entities=peakPredictService.getCityTime(time+"");
 
+        PAUSE();
+
         String[] GROUP={"进站","出站"};
 
         List<List<Integer>>data=CREATE_LISTS(GROUP.length,LINE_NUMBERS,0);

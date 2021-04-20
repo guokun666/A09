@@ -15,9 +15,9 @@ public class MonthPredictEntity {//y
     @ApiModelProperty("线路")
     private String singleline;//line
     @ApiModelProperty("进站客流量")
-    private BigInteger flow_in;//flow_in
+    private Integer flow_in;//flow_in
     @ApiModelProperty("出站客流量")
-    private BigInteger flow_out;//flow_out
+    private Integer flow_out;//flow_out
     @ApiModelProperty("预测月份范围")
     private Integer month;//y_month
     @ApiModelProperty("预测日期范围")

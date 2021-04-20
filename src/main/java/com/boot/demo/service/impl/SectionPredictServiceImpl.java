@@ -22,8 +22,6 @@ public class SectionPredictServiceImpl implements SectionPredictService {
     @Override
     public List<SectionPredictEntity> getSection(String time_slot, String line, Integer y_day) {//数据库的字段名
         List<SectionPredictEntity> a=sectionpreditcDao.getSectionList(time_slot,line,y_day);
-        a.addAll(sectionpreditcDao.getTopUp(time_slot,line,y_day));
-        a.addAll(sectionpreditcDao.getTopDown(time_slot,line,y_day));
         return a;
     }
 

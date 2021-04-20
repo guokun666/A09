@@ -64,6 +64,13 @@ public class CommonConstants {
         } catch (InterruptedException ie){}
     }
 
+    public static final Integer PAUSE_TIME=1000;
+
+    public static void PAUSE(){
+        try { Thread.sleep ( PAUSE_TIME ) ;
+        } catch (InterruptedException ie){}
+    }
+
     //图标展示要用到的json-----------------------------
     public static <T> JSONObject TABLE_JSON(String[] headA,String[] headB,List<List<T>>table){
         JSONObject json=new JSONObject(true);
@@ -89,12 +96,12 @@ public class CommonConstants {
     }
 
 
-    public static <N,V,T,M> List<JSONObject> TWO_JSON_LIST(T key1, List<N> name, M key2, List<V> value){
+    public static <N,V> List<JSONObject> TWO_JSON_LIST(String key1, List<N> name, String key2, List<V> value){
         List<JSONObject>cards=new ArrayList<>();
         for(int i=0;i<name.size();i++){
             JSONObject js=new JSONObject(true);
-            js.put("name",name.get(i));
-            js.put("value",value.get(i));
+            js.put(key1,name.get(i));
+            js.put(key2,value.get(i));
             cards.add(js);
         }
         return cards;

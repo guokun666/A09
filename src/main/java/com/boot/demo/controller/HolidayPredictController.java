@@ -36,7 +36,7 @@ public class HolidayPredictController {
         List<HolidayPredictEntity>entities = holidayPredictService.getCityHoliday();
         if(entities==null||yearNumber<0)return BaseResult.error();
 
-        PAUSE(500);
+        PAUSE();
 
         List<String>AXIS=new ArrayList<>();
         List<BigInteger>data=new ArrayList<>();

@@ -12,7 +12,7 @@ public interface SectionPredictDao {
 
 
     List<SectionPredictEntity> getSectionList(@Param("time")String time, @Param("singleline")String line, @Param("day")Integer day);
-    List<SectionPredictEntity> getTopUp(@Param("time")String time, @Param("singleline")String line, @Param("day")Integer day);
-    List<SectionPredictEntity> getTopDown(@Param("time")String time, @Param("singleline")String line, @Param("day")Integer day);
+    SectionPredictEntity getTopUp(@Param("time")String time, @Param("singleline")String line, @Param("day")Integer day);
+    SectionPredictEntity getTopDown(@Param("time")String time, @Param("singleline")String line, @Param("day")Integer day);
 }
 

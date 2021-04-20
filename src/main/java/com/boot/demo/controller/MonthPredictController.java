@@ -1,5 +1,6 @@
 package com.boot.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.components.common.base.BaseResult;
 import com.boot.demo.entity.MonthPredictEntity;
 import com.boot.demo.service.MonthPredictService;
@@ -20,24 +21,25 @@ import static com.boot.demo.components.common.constant.CommonConstants.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/predictData/singleMonth")
+@RequestMapping("/predictData/singleMonthAndStation")
 @Api(tags = "预测数据")
 public class MonthPredictController {
 
     @Autowired
      private MonthPredictService monthPredictService;
 
-    @GetMapping("/city")
+
+    @GetMapping("/month")
     @ApiOperation(value = "城市-单月预测-各线路客流预测量",notes = "根据预测各条线路一定时间内的客流")
     public Object getCityMonth(@RequestParam("monthNumber")Integer monthNumber){
         List<MonthPredictEntity> entities = monthPredictService.getCityMonth();
         if(entities==null||monthNumber<0||monthNumber>3)return BaseResult.error();
 
-        PAUSE(500);
+        PAUSE();
 
         String[] AXIS=ADD_TO_STRING("未来",INIT_FROM_A_TO_B(1,monthNumber),"月");
 
-        List<List<BigInteger>>data=CREATE_LISTS(LINE_NUMBERS,monthNumber,BigInteger.ZERO);
+        List<List<Integer>>data=CREATE_LISTS(LINE_NUMBERS,monthNumber,0);
 
         for(MonthPredictEntity e:entities){
             if(e.getMonth()<=monthNumber)
@@ -50,6 +52,9 @@ public class MonthPredictController {
                 ))
         );
     }
+
+
+
 //    @GetMapping("/stationpreditc")
 //    @ApiOperation(value = "根据预测各站点一定时间内的客流",notes = "")
 //    public Object getStationMonth(@RequestParam("month")Integer month){
@@ -63,19 +68,25 @@ public class MonthPredictController {
 ////   ..../history/line/a_1?year=2020&line=1号线
 //        // ..../history/line/a_1/2020/1号线
 //    }
-//    @GetMapping("/preditcstation")
-//    @ApiOperation(value = "根据预测显示单站点总和",notes = "")
-//    public Object getStationSum(@RequestParam("date")Integer date,@RequestParam("singleline")String singleline,@RequestParam("station")String station){
-//        return monthPredictService.getStationSum(date,singleline,station);
-////   ..../history/line/a_1?year=2020&line=1号线
-//        // ..../history/line/a_1/2020/1号线
-//    }
-//    @GetMapping("/stationtime")
-//    @ApiOperation(value = "根据预测显示单站点时间段客流",notes = "")
-//    public Object getStationTime(@RequestParam("date")Integer date,@RequestParam("singleline")String singleline,@RequestParam("station")String station){
-//        return monthPredictService.getStationTime(date,singleline,station);
-////   ..../history/line/a_1?year=2020&line=1号线
-//        // ..../history/line/a_1/2020/1号线
-//    }
+
+
+    @GetMapping("/station")
+    @ApiOperation(value = "单线路-单站点预测",notes = "根据预测显示单站点总和\n" +
+            "根据预测显示单站点时间段客流\n" +
+            "根据预测显示单站点时间段客流Top信息")
+    public Object getStationSum(@RequestParam("date")Integer date,
+                                @RequestParam("lineID")Integer lineID
+            ,@RequestParam("station")String station){
+
+        PAUSE();
+
+        String line = lineID+"号线";
+        JSONObject js=new JSONObject(true);
+        js.put("allFlow",monthPredictService.getStationSum(date,line,station));
+        js.put("barChart",monthPredictService.getStationTime(date,line,station));
+        js.put("top",monthPredictService.getStationTop(date,line));
+        return BaseResult.ok(js);
+    }
+
 
 }
