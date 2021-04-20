@@ -106,22 +106,24 @@ public class LineNetworkDiagramEntity {
 
         json.put("xAxis",positionX);
         json.put("yAxis",positionY);
-        json.put("symbolSize",20);//图标大小
+        //json.put("symbolSize",20);//图标大小
         json.put("symbolRotate",rotate);
 
-        JSONObject tooltipJson=new JSONObject(true);
-        //由于默认会显示就不需要了 tooltipJson.put("show",true);//显示图标
-        tooltipJson.put("formatter",text);//显示的提示函数文本
-        tooltipJson.put("triggerOn","click");//当点击的时候显示提示文本
-        json.put("tooltip",tooltipJson);
+        json.put("value",text);
 
-        JSONObject itemStyleJson=new JSONObject(true);
-        JSONObject normalJson=new JSONObject(true);
-        normalJson.put("color","#060376");//内部颜色 默认填充#060376
-        //normalJson.put("borderColor",borderCorlor);
-        //normalJson.put("borderWidth",2);//站点外边框大小默认2
-        itemStyleJson.put("normal",normalJson);
-        json.put("itemStyle",itemStyleJson);
+//        JSONObject tooltipJson=new JSONObject(true);
+//        //由于默认会显示就不需要了 tooltipJson.put("show",true);//显示图标
+//        tooltipJson.put("formatter",text);//显示的提示函数文本
+//        tooltipJson.put("triggerOn","click");//当点击的时候显示提示文本
+//        json.put("tooltip",tooltipJson);
+//
+//        JSONObject itemStyleJson=new JSONObject(true);
+//        JSONObject normalJson=new JSONObject(true);
+//        normalJson.put("color","#060376");//内部颜色 默认填充#060376
+//        //normalJson.put("borderColor",borderColor);
+//        //normalJson.put("borderWidth",2);//站点外边框大小默认2
+//        itemStyleJson.put("normal",normalJson);
+//        json.put("itemStyle",itemStyleJson);
 
         return json;
     }

@@ -2,8 +2,7 @@ package com.boot.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.components.common.base.BaseResult;
-import com.boot.demo.dao.LineNetworkDiagramDao;
-import com.boot.demo.entity.LineNetworkDiagramEntity;
+import com.boot.demo.service.LineNetworkDiagramService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 /**
@@ -28,7 +26,7 @@ import java.util.List;
 public class LineNetworkDiagramController {
 
     @Autowired
-    private LineNetworkDiagramDao lineNetworkDiagramDao;
+    private LineNetworkDiagramService lineNetworkDiagramService;
 
     @ApiOperation(
             value = "获取整体线网图的数据",
@@ -39,27 +37,39 @@ public class LineNetworkDiagramController {
                     "（线路标题 和 站点信息）\n" +
                     "我们决定不在整体线网图中显示列车信息，所以不会返回markPoint[]\n" +
                     "link[]为固定信息，因此不再返回" )
-    @GetMapping("/networkDiagram")
-    public Object getNetworkDiagram(@RequestParam(value = "startTime",required = false)BigInteger startTime,@RequestParam(value = "endTime",required = false)BigInteger endTime){
-        List<JSONObject> jsons = new ArrayList<JSONObject>();
-
-        //先获取 线路标题信息
-        List<LineNetworkDiagramEntity> lineTitles = lineNetworkDiagramDao.getLineTitleInformation();
-        //转换成json串
-        for(LineNetworkDiagramEntity lineTitle:lineTitles){
-            jsons.add(lineTitle.getLineTitleJson());
-        }
-
-        //再获取 站点信息
-        List<LineNetworkDiagramEntity> stations = lineNetworkDiagramDao.getStationInformation();
-        //转换成json串
-        for(LineNetworkDiagramEntity station:stations){
-            jsons.add(station.getStationJson());
-        }
-
-        return BaseResult.ok(jsons);
+    @GetMapping("/cityNetworkDiagram")
+    public Object getCityNetworkDiagram(@RequestParam(value = "startTime",required = false)BigInteger startTime,
+                                        @RequestParam(value = "endTime",required = false)BigInteger endTime){
+        return BaseResult.ok(lineNetworkDiagramService.getCityInformation());
     }
 
+    @ApiOperation(
+            value = "[实时]整体线网图的数据")
+    @GetMapping("/realTimeCityNetworkDiagram")
+    public Object getRealTimeCityNetworkDiagram(){
+        return BaseResult.ok(lineNetworkDiagramService.getCityInformation());
+    }
 
+    @ApiOperation(
+            value = "单线路-线网图的数据")
+    @GetMapping("/lineNetworkDiagram")
+    public Object getLineNetworkDiagram(@RequestParam(value = "startTime",required = false)BigInteger startTime,
+                                        @RequestParam(value = "endTime",required = false)BigInteger endTime,
+                                        @RequestParam("lineID")Integer lineID){
+        String line=lineID+"号线";
+        return BaseResult.ok(lineNetworkDiagramService.getLineStationInformation(line));
+    }
 
+    @ApiOperation(
+            value = "单线路-[实时]线网图的数据")
+    @GetMapping("/realTimeLineNetworkDiagram")
+    public Object getRealTimeLineNetworkDiagram(@RequestParam("lineID")Integer lineID){
+        String line=lineID+"号线";
+        JSONObject json=new JSONObject(true);
+
+        json.put("data",lineNetworkDiagramService.getLineStationInformation(line));
+        json.put("markPoint",lineNetworkDiagramService.getLineTrainInformation(line));
+
+        return BaseResult.ok(json);
+    }
 }

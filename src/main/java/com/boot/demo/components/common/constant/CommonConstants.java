@@ -3,15 +3,16 @@ package com.boot.demo.components.common.constant;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import lombok.experimental.Accessors;
 
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by ace on 2017/8/29.
@@ -26,7 +27,38 @@ public class CommonConstants {
         //        public final static String[] HOLIDAY ={"元旦","春节","清明","五一","端午"};
         public final static Integer LINE_NUMBERS = LINE_NAME.length;//线路数量
 
+    public static final Long REAL_TIME_BEGIN=1615737600L;
 
+    public static Long GET_STAMP(){
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(2021, Calendar.MARCH,15);
+        return new Long((calendar.getTime().getTime()+"").substring(0,10));
+    }
+
+    public static Long GET_STAMP(Long time){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTime(new Date(time));
+        calendar.set(2021, Calendar.MARCH,15);
+        return new Long((calendar.getTime().getTime()+"").substring(0,10));
+    }
+
+    @SneakyThrows
+    public static Long DATE_TO_STAMP(String date, String format) {
+        SimpleDateFormat simpleDateFormat =
+                format==null?
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"):
+                        new SimpleDateFormat(format);
+        return simpleDateFormat.parse(date).getTime();
+    }
+
+    public static String STAMP_TO_DATE(Long stamp,String format){
+        SimpleDateFormat simpleDateFormat =
+                format==null?
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"):
+                        new SimpleDateFormat(format);
+        return simpleDateFormat.format(new Date(stamp));
+    }
+    //暂停
     public static void PAUSE(int n){
         try { Thread.sleep ( n ) ;
         } catch (InterruptedException ie){}
@@ -88,6 +120,14 @@ public class CommonConstants {
         return json;
     }
 
+    public static <T,M,N>JSONObject THREE_JSON(String key1,T value1,String key2,M value2,String key3,N value3){
+        JSONObject json=new JSONObject(true);
+        json.put(key1,value1);
+        json.put(key2,value2);
+        json.put(key3,value3);
+        return json;
+    }
+
     public static <T,M>JSONObject TWO_JSON(String key1,T value1,String key2,M value2){
         JSONObject json=new JSONObject(true);
         json.put(key1,value1);
@@ -129,6 +169,18 @@ public class CommonConstants {
         return json;
     }
 
+    //每个元素都附带它所在的列号
+    public static <T,P> List<Object> SERIES_COLUMNS(String[] columns,List<List<T>>data){
+        List<Object>series=new ArrayList<>();
+        int rows=data.size();
+        for(int i=0;i<rows;i++){
+            JSONObject rowJson=new JSONObject(true);
+            for(int j=0;j<columns.length;j++)
+                rowJson.put(columns[j],data.get(i).get(j));
+            series.add(rowJson);
+        }
+        return series;
+    }
 
     public static <T,P,M> List<Object> SERIES_LIST(P[] groups,M type,List<List<T>>data){
         List<Object>series=new ArrayList<>();

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.boot.demo.dao.RealTimeDao">
+
+<!--	&lt;!&ndash; 可根据自己的需求，是否要使用 &ndash;&gt;-->
+<!--    <resultMap type="com.boot.demo.entity.WorkdayEntity" id="WorkdayMap">-->
+<!--        <result property="year" column="b_year"/>-->
+<!--    </resultMap>-->
+
+
+    <select id="getSingleLineRealTimeStationFlow" resultType="com.boot.demo.entity.StationRealTimeEntity">
+        select s_1.station_name, flow_in,flow_out
+        from s_1 join station on s_1.station_name=station.station_name
+        where line_name = #{line} and time_stamp=#{time}
+    </select>
+
+
+    <select id="getSingleLineRealTimeTrainFlow" resultType="com.boot.demo.entity.TrainsRealTimeEntity">
+        select * from s_2 join station on next_station=station_name
+        where line_name = #{line} and time_stamp=#{time}
+    </select>
+
+</mapper>

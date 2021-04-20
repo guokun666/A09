@@ -32,4 +32,15 @@
         WHERE type='line'
     </select>
 
+    <select id="getSingleLineStationInformation" resultType="com.boot.demo.entity.LineNetworkDiagramEntity">
+        SELECT text,size,x,y,label_position,internal_color,border_color
+            FROM line_network_diagram JOIN station ON text=station_name
+            WHERE line_name=#{line}
+    </select>
+    <select id="getSingleLineTrainInformation" resultType="com.boot.demo.entity.LineNetworkDiagramEntity">
+        SELECT text,x,y,rotate
+        FROM line_network_diagram
+        WHERE type ='train'
+    </select>
+
 </mapper>
