@@ -1,8 +1,11 @@
 package com.boot.demo.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.components.common.base.BaseResult;
 import com.boot.demo.components.common.constant.CommonConstants;
+import com.boot.demo.entity.FlowEntity;
 import com.boot.demo.entity.StationRealTimeEntity;
+import com.boot.demo.entity.TrainOnlineBarEntity;
 import com.boot.demo.entity.TrainsRealTimeEntity;
 import com.boot.demo.service.RealTimeService;
 import io.swagger.annotations.Api;
@@ -40,11 +43,50 @@ public class RealTimeController {
     }
     //-------------------------函数-----------------------------
 
+    @ApiOperation(value = "城市-城市实时信息",notes = "")
+    @GetMapping("RealTimeCityInformation")
+    public Object getCityInformation(@RequestParam(value = "time",required = false)Long time){
+        time=GET_STAMP();
+
+        //线路实时预测
+
+
+        //各线路实时客流
+        List<FlowEntity>allLineRealTimeFlow=realTimeService.getCityRealTimeFlow(time);
+        String[] realGroup={"进站客流","出站客流"};
+        List<List<Integer>>realData=CREATE_LISTS(realGroup.length,LINE_NUMBERS,0);
+
+        for(FlowEntity e:allLineRealTimeFlow){
+            Integer index=INDEX_OF_STRINGS(LINE_NAME,e.getLine());
+            realData.get(0).set(index,e.getFlowIn());
+            realData.get(1).set(index,e.getFlowOut());
+        }
+
+        JSONObject realJson=CHART_JSON(LINE_NAME,SERIES_LIST(realGroup,"bar",realData));
+
+        //实时车辆运营监测
+        List<TrainOnlineBarEntity>trainOnline=realTimeService.getTrainOnlineBar();
+        String[] onlineGroup={"运营车辆","在库车辆"};
+        List<List<Integer>>onlineData=CREATE_LISTS(onlineGroup.length,LINE_NUMBERS,0);
+
+        for(TrainOnlineBarEntity e:trainOnline){
+            Integer index=INDEX_OF_STRINGS(LINE_NAME,e.getLine());
+            onlineData.get(0).set(index,e.getOnlineNumber());
+            onlineData.get(1).set(index,e.getNotOnlineNumber());
+        }
+
+        JSONObject onlineJson=CHART_JSON(LINE_NAME,SERIES_LIST(onlineGroup,"bar",onlineData));
+
+        return BaseResult.ok(TWO_JSON("linesRealTimeBarChart",realJson,
+                "trainsOnlineBarChart",onlineJson));
+    }
+
+
 
     @ApiOperation(value = "单线路-获取线路实时信息",
             notes = "线路ID(lineID)")
     @GetMapping("RealTimeLineInformation")
-    public Object setDoneOrNotDoneByID(@RequestParam("lineID")Integer lineID,
+    public Object getLineInformation(@RequestParam("lineID")Integer lineID,
                                        @RequestParam(value = "time",required = false)Long time){
         String line=lineID+"号线";
 
@@ -109,14 +151,14 @@ public class RealTimeController {
             tData.get(i).set(6,(tEntities.get(i).getIsRun() == 1)+"");
         }
 
-//        return BaseResult.ok(THREE_JSON(
-//                "trainData",SERIES_COLUMNS(tHEAD,tData),
-//                "stationData",SERIES_COLUMNS(sHEAD,sData),
-//                "realPassengerFlowEchartData",CHART_JSON(
-//                        STA,SERIES_LIST(barHEAD,"bar",barData)
-//                )
-//        ));
-        return time;
+        return BaseResult.ok(THREE_JSON(
+                "trainData",SERIES_COLUMNS(tHEAD,tData),
+                "stationData",SERIES_COLUMNS(sHEAD,sData),
+                "realPassengerFlowEchartData",CHART_JSON(
+                        STA,SERIES_LIST(barHEAD,"bar",barData)
+                )
+        ));
+//        return time;
     }
 
 }

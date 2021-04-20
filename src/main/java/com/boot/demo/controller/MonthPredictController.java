@@ -77,15 +77,15 @@ public class MonthPredictController {
     public Object getStationSum(@RequestParam("date")Integer date,
                                 @RequestParam("lineID")Integer lineID
             ,@RequestParam("station")String station){
-
-        PAUSE();
-
-        String line = lineID+"号线";
-        JSONObject js=new JSONObject(true);
-        js.put("allFlow",monthPredictService.getStationSum(date,line,station));
-        js.put("barChart",monthPredictService.getStationTime(date,line,station));
-        js.put("top",monthPredictService.getStationTop(date,line));
-        return BaseResult.ok(js);
+//        PAUSE();
+//
+//        String line = lineID+"号线";
+//        JSONObject js=new JSONObject(true);
+//        js.put("allFlow",monthPredictService.getStationSum(date,line,station));
+//        js.put("barChart",monthPredictService.getStationTime(date,line,station));
+//        js.put("top",monthPredictService.getStationTop(date,line));
+//        return BaseResult.ok(js);
+        return BaseResult.ok();
     }
 
 

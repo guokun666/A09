@@ -21,4 +21,17 @@
         where line_name = #{line} and time_stamp=#{time}
     </select>
 
+    <select id="getCityRealTimeFlow" resultType="com.boot.demo.entity.FlowEntity">
+        SELECT SUM(flow_in) AS flow_in,SUM(flow_out) AS flow_out
+        FROM s_1 JOIN station ON s_1.station_name=station.station_name
+        WHERE time_stamp= #{time}
+        GROUP BY line_name
+    </select>
+    <select id="getCityRealTimeTrain" resultType="com.boot.demo.entity.TrainOnlineBarEntity">
+        SELECT SUM(is_online=1) AS is_online_number,SUM(is_online=0) AS not_is_online_number,line
+        FROM trains
+        GROUP BY line
+    </select>
+
+
 </mapper>

@@ -3,9 +3,7 @@ package com.boot.demo.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.boot.demo.dao.RealTimeDao;
 import com.boot.demo.dao.WorkdayDao;
-import com.boot.demo.entity.StationRealTimeEntity;
-import com.boot.demo.entity.TrainsRealTimeEntity;
-import com.boot.demo.entity.WorkdayEntity;
+import com.boot.demo.entity.*;
 import com.boot.demo.service.RealTimeService;
 import com.boot.demo.service.WorkdayService;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +34,16 @@ public class RealTimeServiceImpl implements RealTimeService {
     @Override
     public List<TrainsRealTimeEntity> getSingleLineRealTimeTrainFlow(String line, Long time) {
         return realTimeDao.getSingleLineRealTimeTrainFlow(line,time);
+    }
+
+    @Override
+    public List<FlowEntity> getCityRealTimeFlow(Long time) {
+        return realTimeDao.getCityRealTimeFlow(time);
+    }
+
+    @Override
+    public List<TrainOnlineBarEntity> getTrainOnlineBar() {
+        return realTimeDao.getCityRealTimeTrain();
     }
 }
 

@@ -46,6 +46,7 @@ public class FlowEventController {
                                  @RequestParam("type")String type,
                                  @RequestParam("description")String description,
                                  @RequestParam(value = "isDone",required = false)Boolean isDone){
+
         FlowEventEntity e=new FlowEventEntity();
         if(isDone!=null)e.setDone(isDone?1:0);
         if(station!=null)e.setStationName(station);

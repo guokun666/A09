@@ -50,6 +50,7 @@ public class LineNetworkDiagramServiceImpl implements LineNetworkDiagramService 
         List<JSONObject>jsons=new ArrayList<>();
 
         for(LineNetworkDiagramEntity e:entities){
+
             jsons.add(e.getStationJson());
         }
 
